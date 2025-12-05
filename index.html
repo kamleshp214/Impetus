@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impetus Technology Placement Guide 2025</title>
-    <meta name="description" content="Comprehensive guide for Impetus Technologies interviews including PYQs, Coding, SQL, and Strategy.">
+    <title>Khushboo's Impetus Guide 2025</title>
+    <meta name="description" content="Comprehensive guide for Impetus Technologies interviews.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -35,16 +35,21 @@
         .comment { color: #7f848e; font-style: italic; }
         .function { color: #61afef; }
 
-        .tab-active { border-bottom: 2px solid var(--primary); color: var(--primary); font-weight: 600; }
+        .tab-active { border-bottom: 2px solid var(--primary); color: var(--primary); font-weight: 600; background-color: rgba(37, 99, 235, 0.05); }
         
         /* Smooth fade */
-        .fade-in { animation: fadeIn 0.3s ease-in; }
+        .fade-in { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; }
+        .tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
         .tag-easy { background: #dcfce7; color: #166534; }
         .tag-medium { background: #fef9c3; color: #854d0e; }
         .tag-hard { background: #fee2e2; color: #991b1b; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .dark-mode ::-webkit-scrollbar-thumb { background: #475569; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 h-screen flex flex-col overflow-hidden">
@@ -52,18 +57,18 @@
     <!-- Navbar -->
     <nav class="bg-white border-b border-gray-200 px-6 py-3 flex justify-between items-center shadow-sm z-10">
         <div class="flex items-center gap-3">
-            <div class="bg-blue-600 text-white p-2 rounded-lg font-bold text-xl">IT</div>
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-2 rounded-lg font-bold text-xl shadow-md">IT</div>
             <div>
-                <h1 class="font-bold text-lg leading-tight">Impetus Technologies</h1>
-                <p class="text-xs text-gray-500">PYQ & Placement Guide • Updated Dec 2025</p>
+                <h1 class="font-bold text-lg leading-tight text-blue-900 dark:text-blue-400">Target Impetus 2025</h1>
+                <p class="text-xs text-gray-500">Premium Preparation Guide • <span class="text-pink-600 font-semibold">For Khushboo</span></p>
             </div>
         </div>
         <div class="flex gap-4 items-center">
-            <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 transition">
+            <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 transition" title="Toggle Dark Mode">
                 <i class="fas fa-moon"></i>
             </button>
-            <button onclick="downloadPDF()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition flex items-center gap-2">
-                <i class="fas fa-file-pdf"></i> Export PDF
+            <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition flex items-center gap-2 shadow-sm">
+                <i class="fas fa-file-pdf"></i> Save as PDF
             </button>
         </div>
     </nav>
@@ -72,32 +77,36 @@
     <div class="flex flex-1 overflow-hidden">
         
         <!-- Sidebar Navigation -->
-        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col hidden md:flex">
+        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col hidden md:flex transition-all">
             <div class="p-4 space-y-1">
+                <div class="pb-4 mb-2 border-b border-gray-100 px-2">
+                    <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Preparation Modules</p>
+                </div>
                 <button onclick="switchTab('dashboard')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3 tab-active" id="btn-dashboard">
-                    <i class="fas fa-chart-pie"></i> Dashboard & Strategy
+                    <i class="fas fa-rocket w-5 text-center"></i> Dashboard
                 </button>
                 <button onclick="switchTab('coding')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3" id="btn-coding">
-                    <i class="fas fa-code"></i> Coding Questions
+                    <i class="fas fa-code w-5 text-center"></i> Coding (25+)
                 </button>
                 <button onclick="switchTab('sql')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3" id="btn-sql">
-                    <i class="fas fa-database"></i> SQL Queries
+                    <i class="fas fa-database w-5 text-center"></i> SQL Queries
                 </button>
                 <button onclick="switchTab('theory')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3" id="btn-theory">
-                    <i class="fas fa-book"></i> Technical Theory
+                    <i class="fas fa-brain w-5 text-center"></i> Core Theory
                 </button>
                 <button onclick="switchTab('hr')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3" id="btn-hr">
-                    <i class="fas fa-users"></i> HR & Behavioral
+                    <i class="fas fa-user-tie w-5 text-center"></i> HR & Strategy
                 </button>
             </div>
-            <div class="mt-auto p-4 border-t">
-                <div class="text-xs text-gray-400 text-center">
-                    Data compiled from Glassdoor, GFG, Naukri Code360 & Reddit (2022-2025)
+            <div class="mt-auto p-4 bg-blue-50 m-4 rounded-xl border border-blue-100">
+                <div class="text-xs text-blue-800 text-center font-medium">
+                    <i class="fas fa-star text-yellow-500 mb-1"></i><br>
+                    "Believe in yourself, Khushboo! You've got this."
                 </div>
             </div>
         </aside>
 
-        <!-- Mobile Menu Button (Visible on small screens) -->
+        <!-- Mobile Menu Button -->
         <div class="md:hidden absolute bottom-4 right-4 z-50">
             <button onclick="document.querySelector('aside').classList.toggle('hidden')" class="bg-blue-600 text-white p-4 rounded-full shadow-lg">
                 <i class="fas fa-bars"></i>
@@ -105,87 +114,126 @@
         </div>
 
         <!-- Content Area -->
-        <main class="flex-1 overflow-y-auto p-6 scroll-smooth bg-gray-50 relative" id="main-content">
+        <main class="flex-1 overflow-y-auto p-6 scroll-smooth bg-gray-50 dark:bg-slate-900 relative" id="main-content">
             
             <!-- Dashboard / Strategy Section -->
             <section id="dashboard" class="fade-in space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <h2 class="text-2xl font-bold mb-4">Roadmap to Crack Impetus</h2>
+                <!-- Welcome Card -->
+                <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h2 class="text-3xl font-bold mb-2">Welcome, Khushboo! 👋</h2>
+                        <p class="text-blue-100 max-w-2xl">This is your personalized roadmap to crack Impetus Technologies. We've curated the most repeated questions from the last 3 years, specifically focusing on Big Data, Java, and SQL.</p>
+                    </div>
+                    <i class="fas fa-trophy absolute -right-4 -bottom-4 text-9xl text-white opacity-10"></i>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 dark:bg-slate-800 dark:border-slate-700">
+                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-map-signs text-blue-500"></i> The Impetus Process</h2>
                     <div class="grid md:grid-cols-4 gap-4">
-                        <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                            <h3 class="font-bold text-blue-900">Round 1: Online Assessment</h3>
-                            <p class="text-sm text-blue-800 mt-1">Platform: HackerRank/Mettl. <br>Duration: 90 mins.<br>Content: 2 Coding (Easy-Med), 2 SQL, 15 Aptitude.</p>
+                        <div class="p-4 bg-blue-50 dark:bg-slate-700 rounded-lg border-l-4 border-blue-500 hover:-translate-y-1 transition duration-300">
+                            <h3 class="font-bold text-blue-900 dark:text-blue-300">Round 1: Online</h3>
+                            <p class="text-xs text-blue-800 dark:text-blue-200 mt-2">
+                                <strong>Platform:</strong> HackerRank/Mettl<br>
+                                <strong>Time:</strong> 90 mins<br>
+                                <strong>Format:</strong> 15 Aptitude, 2 SQL, 2 Coding.
+                            </p>
                         </div>
-                        <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
-                            <h3 class="font-bold text-purple-900">Round 2: Technical I</h3>
-                            <p class="text-sm text-purple-800 mt-1">Focus: Java/OOPs Core, SQL queries, Basic DSA (Arrays/Strings). <br>Duration: 45-60 mins.</p>
+                        <div class="p-4 bg-purple-50 dark:bg-slate-700 rounded-lg border-l-4 border-purple-500 hover:-translate-y-1 transition duration-300">
+                            <h3 class="font-bold text-purple-900 dark:text-purple-300">Round 2: Tech I</h3>
+                            <p class="text-xs text-purple-800 dark:text-purple-200 mt-2">
+                                <strong>Focus:</strong> Core Java (Collections), SQL Joins, Basic DSA.<br>
+                                <strong>Tip:</strong> Be ready to code on Notepad.
+                            </p>
                         </div>
-                        <div class="p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
-                            <h3 class="font-bold text-orange-900">Round 3: Tech II / Managerial</h3>
-                            <p class="text-sm text-orange-800 mt-1">Focus: Projects, System Design basics, Puzzle solving, Resume deep dive.</p>
+                        <div class="p-4 bg-orange-50 dark:bg-slate-700 rounded-lg border-l-4 border-orange-500 hover:-translate-y-1 transition duration-300">
+                            <h3 class="font-bold text-orange-900 dark:text-orange-300">Round 3: Tech II</h3>
+                            <p class="text-xs text-orange-800 dark:text-orange-200 mt-2">
+                                <strong>Focus:</strong> Projects, System Design, Puzzles.<br>
+                                <strong>Big Data:</strong> Know Spark/Hive basics if mentioned in resume.
+                            </p>
                         </div>
-                        <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
-                            <h3 class="font-bold text-green-900">Round 4: HR</h3>
-                            <p class="text-sm text-green-800 mt-1">Focus: Relocation, Salary, Culture fit, "Why Impetus?".</p>
+                        <div class="p-4 bg-green-50 dark:bg-slate-700 rounded-lg border-l-4 border-green-500 hover:-translate-y-1 transition duration-300">
+                            <h3 class="font-bold text-green-900 dark:text-green-300">Round 4: HR</h3>
+                            <p class="text-xs text-green-800 dark:text-green-200 mt-2">
+                                <strong>Focus:</strong> Relocation, Stability, Salary.<br>
+                                <strong>Offices:</strong> Noida, Indore, Bangalore.
+                            </p>
                         </div>
                     </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-check-circle text-green-500 mr-2"></i>Preparation Checklist</h3>
-                        <ul class="space-y-2 text-sm">
-                            <li class="flex items-center gap-2"><input type="checkbox" checked disabled> Master HashMap internals (HashCode/Equals).</li>
-                            <li class="flex items-center gap-2"><input type="checkbox" checked disabled> Practice SQL Joins & Window Functions.</li>
-                            <li class="flex items-center gap-2"><input type="checkbox"> Solve top 50 Array/String problems.</li>
-                            <li class="flex items-center gap-2"><input type="checkbox"> Revise ACID properties & Normalization.</li>
-                            <li class="flex items-center gap-2"><input type="checkbox"> Prepare "Tell me about your project" (STAR method).</li>
-                        </ul>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 dark:bg-slate-800 dark:border-slate-700">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-check-circle text-green-500 mr-2"></i>Daily Checklist</h3>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-slate-700 rounded cursor-pointer">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded"> 
+                                <span class="text-sm">Master <strong>HashMap Internals</strong> (Collision, Buckets).</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-slate-700 rounded cursor-pointer">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded"> 
+                                <span class="text-sm">Practice <strong>SQL Self-Joins</strong> & Window Functions.</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-slate-700 rounded cursor-pointer">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded"> 
+                                <span class="text-sm">Solve 1 DP & 1 Tree problem daily.</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-slate-700 rounded cursor-pointer">
+                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded"> 
+                                <span class="text-sm">Prepare "Tell me about your Project" (STAR format).</span>
+                            </label>
+                        </div>
                     </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>Common Mistakes</h3>
-                        <ul class="list-disc pl-5 space-y-2 text-sm text-gray-600">
-                            <li>Ignoring <strong>Java Collections</strong> internal working.</li>
-                            <li>Writing SQL queries without handling <strong>NULL</strong> values.</li>
-                            <li>Not asking questions at the end of the interview.</li>
-                            <li>Using brute force without mentioning complexity first.</li>
-                        </ul>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 dark:bg-slate-800 dark:border-slate-700">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-building text-gray-500 mr-2"></i>Why Impetus? (Cheat Sheet)</h3>
+                        <div class="text-sm text-gray-600 dark:text-gray-300 space-y-3">
+                            <p>Use these points when they ask "Why do you want to join us?":</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li><strong>Big Data Leader:</strong> "I admire Impetus for its deep expertise in Data Engineering and Modernization."</li>
+                                <li><strong>Products:</strong> "I'm excited about products like <strong>Gathr</strong> (ETL platform) and <strong>LeapLogic</strong> (Cloud migration)."</li>
+                                <li><strong>Learning Culture:</strong> "I've read about the strong internal learning culture and labs at Impetus."</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- Coding Section -->
             <section id="coding" class="hidden fade-in space-y-4">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-2xl font-bold">Coding Question Bank (40+)</h2>
-                    <div class="flex gap-2">
-                        <input type="text" id="codingSearch" placeholder="Search problems..." class="border rounded-md px-3 py-1 text-sm w-64 dark:text-black" onkeyup="filterCoding()">
-                        <select id="codingFilter" class="border rounded-md px-2 py-1 text-sm dark:text-black" onchange="filterCoding()">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold">Coding Question Bank</h2>
+                        <p class="text-sm text-gray-500">25+ most frequently asked questions</p>
+                    </div>
+                    <div class="flex gap-2 w-full md:w-auto">
+                        <input type="text" id="codingSearch" placeholder="Search (e.g. 'Tree', 'Array')" class="border rounded-lg px-4 py-2 text-sm w-full md:w-64 dark:text-black focus:ring-2 focus:ring-blue-500 outline-none" onkeyup="filterCoding()">
+                        <select id="codingFilter" class="border rounded-lg px-2 py-2 text-sm dark:text-black bg-white" onchange="filterCoding()">
                             <option value="all">All Topics</option>
                             <option value="Array">Arrays</option>
                             <option value="String">Strings</option>
                             <option value="LinkedList">Linked List</option>
                             <option value="Tree">Tree/Graph</option>
+                            <option value="DP">Dynamic Prog</option>
                         </select>
                     </div>
                 </div>
 
-                <div id="coding-container" class="space-y-4">
+                <div id="coding-container" class="grid gap-4">
                     <!-- Javascript will populate this -->
                 </div>
             </section>
 
             <!-- SQL Section -->
             <section id="sql" class="hidden fade-in">
-                <h2 class="text-2xl font-bold mb-6">SQL Interview Questions (25+)</h2>
+                <h2 class="text-2xl font-bold mb-6">SQL Interview Mastery</h2>
                 <div class="flex flex-col lg:flex-row gap-6 h-[calc(100vh-150px)]">
                     <!-- Left: Schema Reference -->
-                    <div class="lg:w-1/3 bg-white p-5 rounded-xl shadow-sm border border-gray-100 overflow-y-auto">
-                        <h3 class="font-bold text-gray-700 mb-3 border-b pb-2">Common Schemas</h3>
+                    <div class="lg:w-1/3 bg-white p-5 rounded-xl shadow-sm border border-gray-100 overflow-y-auto dark:bg-slate-800 dark:border-slate-700">
+                        <h3 class="font-bold text-gray-700 dark:text-gray-200 mb-3 border-b pb-2">Reference Schema</h3>
                         
                         <div class="mb-6">
                             <h4 class="font-semibold text-sm text-blue-600 mb-2">Table: Employees</h4>
-                            <div class="text-xs font-mono bg-gray-50 p-3 rounded border">
+                            <div class="text-xs font-mono bg-gray-50 dark:bg-slate-900 p-3 rounded border dark:border-slate-600">
                                 | emp_id | name   | dept_id | salary | manager_id |<br>
                                 |--------|--------|---------|--------|------------|<br>
                                 | 1      | Alice  | 101     | 80000  | 3          |<br>
@@ -196,18 +244,18 @@
                         </div>
 
                         <div>
-                            <h4 class="font-semibold text-sm text-blue-600 mb-2">Table: Flights (Asked in 2024)</h4>
-                            <div class="text-xs font-mono bg-gray-50 p-3 rounded border">
-                                | flight_id | origin | dest | cost | flight_date |<br>
-                                |-----------|--------|------|------|-------------|<br>
-                                | F1        | DEL    | BOM  | 5000 | 2024-01-01  |<br>
-                                | F2        | BOM    | DEL  | 5500 | 2024-01-02  |
+                            <h4 class="font-semibold text-sm text-blue-600 mb-2">Table: Orders</h4>
+                            <div class="text-xs font-mono bg-gray-50 dark:bg-slate-900 p-3 rounded border dark:border-slate-600">
+                                | id | cust_id | amount | order_date |<br>
+                                |----|---------|--------|------------|<br>
+                                | 1  | 101     | 500    | 2024-01-01 |<br>
+                                | 2  | 102     | 200    | 2024-01-02 |
                             </div>
                         </div>
                     </div>
 
                     <!-- Right: Questions -->
-                    <div class="lg:w-2/3 space-y-4 overflow-y-auto pr-2" id="sql-container">
+                    <div class="lg:w-2/3 space-y-4 overflow-y-auto pr-2 pb-10" id="sql-container">
                         <!-- Populated by JS -->
                     </div>
                 </div>
@@ -215,8 +263,17 @@
 
             <!-- Theory Section -->
             <section id="theory" class="hidden fade-in space-y-6">
-                <h2 class="text-2xl font-bold">Technical Theory Questions</h2>
-                <p class="text-sm text-gray-500 mb-4">Core concepts frequently asked in Technical Round 1 & 2.</p>
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h2 class="text-2xl font-bold">Technical Theory</h2>
+                        <p class="text-sm text-gray-500">Core CS Concepts & Big Data</p>
+                    </div>
+                    <div class="flex gap-2 text-xs">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">Java</span>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full">Big Data</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full">OS/DBMS</span>
+                    </div>
+                </div>
                 
                 <div class="grid md:grid-cols-2 gap-4" id="theory-container">
                     <!-- Populated by JS -->
@@ -225,7 +282,7 @@
 
             <!-- HR Section -->
             <section id="hr" class="hidden fade-in max-w-4xl mx-auto">
-                <h2 class="text-2xl font-bold mb-6 text-center">HR & Managerial Round</h2>
+                <h2 class="text-2xl font-bold mb-6 text-center">HR & Managerial Round Strategy</h2>
                 
                 <div class="space-y-6" id="hr-container">
                     <!-- Populated by JS -->
@@ -236,7 +293,7 @@
     </div>
 
     <script>
-        // --- Data Source ---
+        // --- EXPANDED Data Source ---
         
         const codingQuestions = [
             {
@@ -419,7 +476,7 @@ public int findDuplicate(int[] nums) {
     return dummy.next`
             },
              {
-                id: 8, title: "Longest Substring Without Repeating Characters", topic: "String", diff: "Medium", freq: "High", year: "2024",
+                id: 8, title: "Longest Substring Without Repeating", topic: "String", diff: "Medium", freq: "High", year: "2024",
                 prob: "Find the length of the longest substring without repeating characters.",
                 codeJava: `public int lengthOfLongestSubstring(String s) {
     int n = s.length(), ans = 0;
@@ -443,18 +500,191 @@ public int findDuplicate(int[] nums) {
         ans = max(ans, j - i + 1)
         char_map[s[j]] = j + 1
     return ans`
+            },
+            {
+                id: 9, title: "Valid Parentheses", topic: "String", diff: "Easy", freq: "Very High", year: "2025",
+                prob: "Determine if the input string has valid parentheses '()', '{}', '[]'.",
+                codeJava: `public boolean isValid(String s) {
+    Stack<Character> stack = new Stack<>();
+    for (char c : s.toCharArray()) {
+        if (c == '(') stack.push(')');
+        else if (c == '{') stack.push('}');
+        else if (c == '[') stack.push(']');
+        else if (stack.isEmpty() || stack.pop() != c) return false;
+    }
+    return stack.isEmpty();
+}`,
+                codePy: `def isValid(s):
+    stack = []
+    map = {")": "(", "}": "{", "]": "["}
+    for char in s:
+        if char in map:
+            top = stack.pop() if stack else '#'
+            if map[char] != top: return False
+        else:
+            stack.append(char)
+    return not stack`
+            },
+            {
+                id: 10, title: "Merge Two Sorted Lists", topic: "LinkedList", diff: "Easy", freq: "High", year: "2023",
+                prob: "Merge two sorted linked lists and return it as a sorted list.",
+                codeJava: `public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    if(l1 == null) return l2;
+    if(l2 == null) return l1;
+    if(l1.val < l2.val){
+        l1.next = mergeTwoLists(l1.next, l2);
+        return l1;
+    } else{
+        l2.next = mergeTwoLists(l1, l2.next);
+        return l2;
+    }
+}`,
+                codePy: `def mergeTwoLists(l1, l2):
+    if not l1: return l2
+    if not l2: return l1
+    if l1.val < l2.val:
+        l1.next = mergeTwoLists(l1.next, l2)
+        return l1
+    else:
+        l2.next = mergeTwoLists(l1, l2.next)
+        return l2`
+            },
+            {
+                id: 11, title: "Best Time to Buy and Sell Stock", topic: "DP", diff: "Easy", freq: "High", year: "2024",
+                prob: "Maximize profit by choosing a single day to buy and a different day in the future to sell.",
+                codeJava: `public int maxProfit(int[] prices) {
+    int minPrice = Integer.MAX_VALUE;
+    int maxProfit = 0;
+    for(int price : prices) {
+        if(price < minPrice) minPrice = price;
+        else if(price - minPrice > maxProfit) maxProfit = price - minPrice;
+    }
+    return maxProfit;
+}`,
+                codePy: `def maxProfit(prices):
+    min_price = float('inf')
+    max_profit = 0
+    for price in prices:
+        if price < min_price:
+            min_price = price
+        elif price - min_price > max_profit:
+            max_profit = price - min_price
+    return max_profit`
+            },
+            {
+                id: 12, title: "Group Anagrams", topic: "String", diff: "Medium", freq: "Medium", year: "2023",
+                prob: "Given an array of strings, group the anagrams together.",
+                codeJava: `public List<List<String>> groupAnagrams(String[] strs) {
+    if (strs.length == 0) return new ArrayList<>();
+    Map<String, List<String>> map = new HashMap<>();
+    for (String s : strs) {
+        char[] ca = s.toCharArray();
+        Arrays.sort(ca);
+        String key = String.valueOf(ca);
+        if (!map.containsKey(key)) map.put(key, new ArrayList<>());
+        map.get(key).add(s);
+    }
+    return new ArrayList<>(map.values());
+}`,
+                codePy: `def groupAnagrams(strs):
+    ans = collections.defaultdict(list)
+    for s in strs:
+        ans[tuple(sorted(s))].append(s)
+    return ans.values()`
+            },
+            {
+                id: 13, title: "Maximum Subarray (Kadane's)", topic: "Array", diff: "Easy", freq: "Very High", year: "2022",
+                prob: "Find the contiguous subarray (containing at least one number) which has the largest sum.",
+                codeJava: `public int maxSubArray(int[] nums) {
+    int maxSoFar = nums[0], maxEndingHere = nums[0];
+    for (int i = 1; i < nums.length; i++) {
+        maxEndingHere = Math.max(nums[i], maxEndingHere + nums[i]);
+        maxSoFar = Math.max(maxSoFar, maxEndingHere);
+    }
+    return maxSoFar;
+}`,
+                codePy: `def maxSubArray(nums):
+    max_so_far = nums[0]
+    max_ending_here = nums[0]
+    for i in range(1, len(nums)):
+        max_ending_here = max(nums[i], max_ending_here + nums[i])
+        max_so_far = max(max_so_far, max_ending_here)
+    return max_so_far`
+            },
+            {
+                id: 14, title: "Detect Loop in Linked List", topic: "LinkedList", diff: "Easy", freq: "High", year: "2024",
+                prob: "Determine if a linked list has a cycle in it.",
+                codeJava: `public boolean hasCycle(ListNode head) {
+    if (head == null) return false;
+    ListNode slow = head;
+    ListNode fast = head.next;
+    while (slow != fast) {
+        if (fast == null || fast.next == null) return false;
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return true;
+}`,
+                codePy: `def hasCycle(head):
+    if not head: return False
+    slow = head
+    fast = head.next
+    while slow != fast:
+        if not fast or not fast.next: return False
+        slow = slow.next
+        fast = fast.next.next
+    return True`
+            },
+            {
+                id: 15, title: "Symmetric Tree", topic: "Tree", diff: "Easy", freq: "Medium", year: "2023",
+                prob: "Check whether a binary tree is a mirror of itself (symmetric around its center).",
+                codeJava: `public boolean isSymmetric(TreeNode root) {
+    return root==null || isMirror(root.left, root.right);
+}
+boolean isMirror(TreeNode t1, TreeNode t2){
+    if(t1==null && t2==null) return true;
+    if(t1==null || t2==null) return false;
+    return (t1.val==t2.val) && isMirror(t1.right, t2.left) && isMirror(t1.left, t2.right);
+}`,
+                codePy: `def isSymmetric(root):
+    if not root: return True
+    def isMirror(t1, t2):
+        if not t1 and not t2: return True
+        if not t1 or not t2: return False
+        return (t1.val == t2.val) and isMirror(t1.right, t2.left) and isMirror(t1.left, t2.right)
+    return isMirror(root.left, root.right)`
+            },
+            {
+                id: 16, title: "Climbing Stairs", topic: "DP", diff: "Easy", freq: "Medium", year: "2023",
+                prob: "You are climbing a staircase. It takes n steps to reach the top. Each time you can either climb 1 or 2 steps. How many distinct ways can you climb to the top?",
+                codeJava: `public int climbStairs(int n) {
+    if(n <= 2) return n;
+    int a = 1, b = 2;
+    for(int i = 3; i <= n; i++) {
+        int sum = a + b;
+        a = b;
+        b = sum;
+    }
+    return b;
+}`,
+                codePy: `def climbStairs(n):
+    if n <= 2: return n
+    a, b = 1, 2
+    for i in range(3, n + 1):
+        a, b = b, a + b
+    return b`
             }
         ];
 
         const sqlQuestions = [
             {
                 title: "Second Highest Salary",
-                desc: "Find the second highest salary from the Employees table. Handle case where there is only one record.",
+                desc: "Find the second highest salary from the Employees table.",
                 query: `SELECT MAX(salary) 
 FROM Employees 
 WHERE salary < (SELECT MAX(salary) FROM Employees);
 
--- Alternative (Window Function)
+-- Better Approach (Window Function)
 SELECT salary FROM (
     SELECT salary, DENSE_RANK() OVER(ORDER BY salary DESC) as rnk 
     FROM Employees
@@ -470,7 +700,7 @@ HAVING COUNT(email) > 1;`
             },
             {
                 title: "Employees Earning More Than Managers",
-                desc: "Find employees who earn more than their managers.",
+                desc: "Find employees who earn more than their managers. (Self Join)",
                 query: `SELECT e.name 
 FROM Employees e
 JOIN Employees m ON e.manager_id = m.emp_id
@@ -481,40 +711,91 @@ WHERE e.salary > m.salary;`
                 desc: "Delete duplicate rows from table 'Person' keeping only unique ids.",
                 query: `DELETE p1 
 FROM Person p1, Person p2 
-WHERE p1.email = p2.email AND p1.id > p2.id;
-
--- Using CTE
-WITH CTE AS (
-    SELECT id, ROW_NUMBER() OVER(PARTITION BY email ORDER BY id) as rn 
-    FROM Person
-)
-DELETE FROM Person WHERE id IN (SELECT id FROM CTE WHERE rn > 1);`
+WHERE p1.email = p2.email AND p1.id > p2.id;`
             },
             {
-                title: "Find Flights within Budget (2024)",
+                title: "Department Highest Salary",
+                desc: "Find employees who have the highest salary in each of the departments.",
+                query: `SELECT d.name AS Department, e.name AS Employee, e.salary 
+FROM Employees e
+JOIN Department d ON e.dept_id = d.id
+WHERE (e.dept_id, e.salary) IN (
+    SELECT dept_id, MAX(salary)
+    FROM Employees
+    GROUP BY dept_id
+);`
+            },
+            {
+                title: "Rising Temperature",
+                desc: "Find all dates' Id with higher temperatures compared to its previous dates (yesterday).",
+                query: `SELECT w1.id
+FROM Weather w1
+JOIN Weather w2 
+ON DATEDIFF(w1.recordDate, w2.recordDate) = 1
+WHERE w1.temperature > w2.temperature;`
+            },
+            {
+                title: "Classes More Than 5 Students",
+                desc: "List out all classes which have more than or equal to 5 students.",
+                query: `SELECT class
+FROM Courses
+GROUP BY class
+HAVING COUNT(student) >= 5;`
+            },
+            {
+                title: "Swap Salary",
+                desc: "Swap all 'f' and 'm' values with a single update statement and no intermediate temp table.",
+                query: `UPDATE Salary
+SET sex = CASE 
+    WHEN sex = 'm' THEN 'f' 
+    ELSE 'm' 
+END;`
+            },
+            {
+                title: "Find Flights within Budget",
                 desc: "Find origin and destination of flights with cost < 6000 ordered by date.",
                 query: `SELECT origin, dest 
 FROM Flights 
 WHERE cost < 6000 
 ORDER BY flight_date ASC;`
+            },
+            {
+                title: "Customers Who Never Order",
+                desc: "Find customers who have never ordered anything.",
+                query: `SELECT name as Customers
+FROM Customers
+WHERE id NOT IN (SELECT cust_id FROM Orders);
+
+-- OR Left Join
+SELECT c.name 
+FROM Customers c
+LEFT JOIN Orders o ON c.id = o.cust_id
+WHERE o.id IS NULL;`
             }
         ];
 
         const theoryQuestions = [
-            { cat: "Java Core", q: "Difference between HashMap and ConcurrentHashMap?", a: "HashMap is not thread-safe. ConcurrentHashMap is thread-safe and allows concurrent access to different segments of the map without locking the entire map (Lock Stripping)." },
-            { cat: "Java Core", q: "What is the contract between equals() and hashCode()?", a: "1) If two objects are equal, they MUST have the same hashCode. 2) If two objects have the same hashCode, they are NOT necessarily equal (Collision). 3) Always override both together." },
-            { cat: "Java Core", q: "Explain the Diamond Problem.", a: "Occurs in multiple inheritance (not supported in Java classes) when a class inherits from two classes that have a method with the same signature. Java solves this using Interfaces (default methods must be overridden if conflict exists)." },
-            { cat: "OS / Threads", q: "What is Deadlock and the Banker's Algorithm?", a: "Deadlock is when two processes wait for each other to release resources. Banker's Algorithm is a deadlock avoidance method that checks if allocating resources leaves the system in a safe state." },
-            { cat: "DBMS", q: "ACID Properties?", a: "Atomicity (All or nothing), Consistency (DB remains valid), Isolation (Transactions don't interfere), Durability (Saved data persists)." },
-            { cat: "DBMS", q: "What is Normalization? Explain BCNF.", a: "Process to reduce redundancy. BCNF (Boyce-Codd Normal Form) is a stricter version of 3NF where for every dependency X -> Y, X must be a superkey." },
-            { cat: "Web", q: "PUT vs PATCH?", a: "PUT replaces the entire resource. PATCH updates only the specified fields of the resource." }
+            { cat: "Java Core", q: "HashMap vs ConcurrentHashMap?", a: "HashMap is non-thread-safe and fast. ConcurrentHashMap is thread-safe, using 'Lock Stripping' (segments) to allow concurrent reads/writes without locking the whole map." },
+            { cat: "Java Core", q: "Equals vs HashCode Contract?", a: "1) If equal, must have same hashCode. 2) If same hashCode, NOT necessarily equal (Collision). 3) Always override both." },
+            { cat: "Java Core", q: "What is the Diamond Problem?", a: "Ambiguity in multiple inheritance when a class inherits 2 classes having same method. Java avoids this by not allowing multiple class inheritance (only via Interfaces)." },
+            { cat: "Java Core", q: "Final, Finally, Finalize?", a: "Final: Constant/Non-inheritable. Finally: Block always executed in try-catch. Finalize: Method called by Garbage Collector before deletion." },
+            
+            { cat: "Big Data", q: "What is CAP Theorem?", a: "In a distributed system, you can only pick 2: Consistency, Availability, Partition Tolerance. (NoSQL DBs usually sacrifice C or A)." },
+            { cat: "Big Data", q: "RDD vs DataFrame (Spark)?", a: "RDD: Low-level, immutable collection, no optimization. DataFrame: High-level, organized into named columns, optimized by Catalyst Optimizer." },
+            { cat: "Big Data", q: "HDFS Architecture?", a: "Master-Slave. NameNode stores metadata (file paths), DataNodes store actual data blocks. Replication factor (default 3) ensures fault tolerance." },
+            
+            { cat: "OS & DBMS", q: "Deadlock & Banker's Algorithm?", a: "Deadlock: Processes waiting for each other forever. Banker's Algo: Avoids deadlock by checking if resource allocation leaves system in 'Safe State'." },
+            { cat: "OS & DBMS", q: "ACID Properties?", a: "Atomicity (All or nothing), Consistency (Valid state), Isolation (No interference), Durability (Saved forever)." },
+            { cat: "OS & DBMS", q: "Normalization (BCNF)?", a: "Removing redundancy. BCNF is stricter 3NF: For dependency X->Y, X must be a superkey." },
+            { cat: "OS & DBMS", q: "Process vs Thread?", a: "Process: Independent program execution, separate memory. Thread: Light-weight unit within a process, shares memory." }
         ];
 
         const hrQuestions = [
-            { q: "Tell me about yourself.", a: "Start with current role/education, mention key projects (especially Big Data/Java if applying to Impetus), mention 1-2 soft skills, and end with why you are here." },
-            { q: "Why Impetus?", a: "Mention their strong reputation in Big Data and Cloud Engineering. Mention specific open-source tools they contribute to (like Kundera) or their focus on Data Warehouse modernization." },
-            { q: "Explain your Final Year Project.", a: "Use STAR method: Situation (Problem), Task (Your Goal), Action (Tech stack, your specific code), Result (Outcome/Efficiency)." },
-            { q: "Are you willing to relocate?", a: "Impetus has major offices in Noida, Indore, Bengaluru, and Gurugram. Be open to relocation." }
+            { q: "Tell me about yourself.", a: "Start with education, highlight 1-2 major projects (mention tech stack used), any internship experience, and why you are interested in Data Engineering/Impetus." },
+            { q: "Why Impetus?", a: "Mention their specific products like <strong>Gathr</strong> (data pipeline tool). Say: 'I want to work in a company that builds actual Data Products, not just services.' Mention their focus on Cloud/Big Data." },
+            { q: "Explain your Final Year Project.", a: "Use STAR method: <strong>Situation</strong> (The problem), <strong>Task</strong> (Your goal), <strong>Action</strong> (Used React/Node/SQL...), <strong>Result</strong> (Improved efficiency by X%)." },
+            { q: "Are you willing to relocate?", a: "Impetus has major hubs in Noida, Indore, and Bangalore. Answer YES enthusiastically." },
+            { q: "Strength & Weakness?", a: "Strength: 'I am persistent with debugging.' Weakness: 'I sometimes struggle to say no, but I am learning to prioritize tasks better.' (Turn negative into positive)." }
         ];
 
         // --- Renders ---
@@ -530,35 +811,39 @@ ORDER BY flight_date ASC;`
             });
 
             if (filtered.length === 0) {
-                container.innerHTML = '<div class="text-center text-gray-500 py-10">No questions found matching criteria.</div>';
+                container.innerHTML = '<div class="text-center text-gray-500 py-10 italic">No questions found. Try a different filter!</div>';
                 return;
             }
 
             filtered.forEach(q => {
                 const div = document.createElement("div");
-                div.className = "card bg-white p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition";
+                div.className = "card bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition dark:bg-slate-800 dark:border-slate-700";
                 div.innerHTML = `
                     <div class="flex justify-between items-start mb-2">
                         <div>
-                            <h3 class="font-bold text-lg text-blue-700">${q.title}</h3>
-                            <div class="flex gap-2 mt-1">
+                            <h3 class="font-bold text-lg text-blue-700 dark:text-blue-400 flex items-center gap-2">
+                                ${q.title}
+                                ${q.freq === 'Very High' ? '<span class="text-[10px] bg-red-100 text-red-600 px-2 py-0.5 rounded-full animate-pulse">🔥 Hot</span>' : ''}
+                            </h3>
+                            <div class="flex gap-2 mt-2">
                                 <span class="tag ${q.diff === 'Easy' ? 'tag-easy' : q.diff === 'Medium' ? 'tag-medium' : 'tag-hard'}">${q.diff}</span>
-                                <span class="tag bg-gray-100 text-gray-600">${q.topic}</span>
-                                ${q.freq === 'High' ? '<span class="tag bg-purple-100 text-purple-700">High Freq</span>' : ''}
-                                <span class="tag bg-gray-50 text-gray-500 text-[10px] pt-1">${q.year}</span>
+                                <span class="tag bg-gray-100 text-gray-600 dark:bg-slate-700 dark:text-gray-300">${q.topic}</span>
+                                <span class="tag bg-blue-50 text-blue-500 dark:bg-slate-700 dark:text-blue-300">Asked: ${q.year}</span>
                             </div>
                         </div>
-                        <button onclick="toggleSol(${q.id})" class="text-sm text-blue-500 hover:underline">Show Solution</button>
+                        <button onclick="toggleSol(${q.id})" class="text-sm font-semibold text-blue-600 hover:text-blue-800 dark:text-blue-400 bg-blue-50 dark:bg-slate-700 px-3 py-1 rounded transition">
+                            <i class="fas fa-eye mr-1"></i> Solution
+                        </button>
                     </div>
-                    <p class="text-sm text-gray-600 mb-3">${q.prob}</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">${q.prob}</p>
                     
-                    <div id="sol-${q.id}" class="hidden mt-4 border-t pt-3">
-                        <div class="flex gap-4 mb-2 text-sm font-semibold text-gray-500">
-                            <button onclick="showCode(${q.id}, 'java')" class="hover:text-blue-600" id="btn-java-${q.id}">Java</button>
-                            <button onclick="showCode(${q.id}, 'py')" class="hover:text-blue-600" id="btn-py-${q.id}">Python</button>
+                    <div id="sol-${q.id}" class="hidden mt-4 border-t dark:border-slate-700 pt-3">
+                        <div class="flex gap-4 mb-2 text-xs font-bold text-gray-500 uppercase tracking-wider">
+                            <button onclick="showCode(${q.id}, 'java')" class="hover:text-blue-600 transition" id="btn-java-${q.id}">Java</button>
+                            <button onclick="showCode(${q.id}, 'py')" class="hover:text-blue-600 transition" id="btn-py-${q.id}">Python</button>
                         </div>
-                        <div class="bg-gray-800 text-gray-200 p-4 rounded-md overflow-x-auto text-xs font-mono relative">
-                            <button onclick="copyCode('code-block-${q.id}')" class="absolute top-2 right-2 text-gray-400 hover:text-white"><i class="fas fa-copy"></i></button>
+                        <div class="bg-slate-900 text-gray-200 p-4 rounded-lg overflow-x-auto text-xs font-mono relative shadow-inner">
+                            <button onclick="copyCode('code-block-${q.id}')" class="absolute top-2 right-2 text-gray-500 hover:text-white transition"><i class="fas fa-copy"></i></button>
                             <pre id="code-block-${q.id}">${q.codeJava}</pre>
                         </div>
                     </div>
@@ -571,10 +856,13 @@ ORDER BY flight_date ASC;`
             const container = document.getElementById("sql-container");
             sqlQuestions.forEach((q, idx) => {
                 container.innerHTML += `
-                    <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
-                        <h3 class="font-bold text-lg text-slate-700 mb-2">${idx + 1}. ${q.title}</h3>
-                        <p class="text-sm text-gray-600 mb-3">${q.desc}</p>
-                        <div class="bg-slate-900 text-blue-300 p-3 rounded text-sm font-mono overflow-x-auto">
+                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm dark:bg-slate-800 dark:border-slate-700 hover:shadow-md transition">
+                        <div class="flex items-start gap-3 mb-2">
+                             <span class="bg-blue-100 text-blue-700 font-bold text-xs w-6 h-6 flex items-center justify-center rounded-full mt-0.5">${idx + 1}</span>
+                             <h3 class="font-bold text-lg text-slate-700 dark:text-slate-200">${q.title}</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 ml-9">${q.desc}</p>
+                        <div class="ml-9 bg-slate-900 text-blue-300 p-3 rounded-lg text-sm font-mono overflow-x-auto border-l-4 border-blue-500">
                             <pre>${q.query}</pre>
                         </div>
                     </div>
@@ -585,11 +873,17 @@ ORDER BY flight_date ASC;`
         function renderTheory() {
             const container = document.getElementById("theory-container");
             theoryQuestions.forEach(q => {
+                // Determine color based on category
+                let borderClass = "border-l-4 border-gray-300";
+                if(q.cat.includes("Java")) borderClass = "border-l-4 border-blue-400";
+                if(q.cat.includes("Big Data")) borderClass = "border-l-4 border-orange-400";
+                if(q.cat.includes("OS")) borderClass = "border-l-4 border-green-400";
+
                 container.innerHTML += `
-                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
-                        <span class="text-xs font-bold text-blue-500 uppercase tracking-wide">${q.cat}</span>
-                        <h4 class="font-semibold text-gray-800 mt-1 mb-2">${q.q}</h4>
-                        <p class="text-sm text-gray-600">${q.a}</p>
+                    <div class="bg-white p-5 rounded-lg border border-gray-100 shadow-sm dark:bg-slate-800 dark:border-slate-700 ${borderClass} hover:shadow-md transition">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">${q.cat}</span>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-200 mt-1 mb-2 text-base">${q.q}</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">${q.a}</p>
                     </div>
                 `;
             });
@@ -599,13 +893,15 @@ ORDER BY flight_date ASC;`
             const container = document.getElementById("hr-container");
             hrQuestions.forEach(q => {
                 container.innerHTML += `
-                    <div class="flex gap-4">
-                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 flex-shrink-0">
-                            <i class="fas fa-user-tie"></i>
+                    <div class="flex gap-4 group">
+                        <div class="w-10 h-10 rounded-full bg-blue-50 dark:bg-slate-700 flex items-center justify-center text-blue-600 dark:text-blue-400 flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+                            <i class="fas fa-comment-dots"></i>
                         </div>
-                        <div class="bg-white p-4 rounded-lg rounded-tl-none shadow-sm border border-gray-200 flex-1">
-                            <h4 class="font-bold text-gray-800 mb-1">${q.q}</h4>
-                            <p class="text-sm text-gray-600 italic">" ${q.a} "</p>
+                        <div class="bg-white p-5 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 dark:bg-slate-800 dark:border-slate-700 flex-1 relative">
+                            <h4 class="font-bold text-gray-800 dark:text-gray-200 mb-2">${q.q}</h4>
+                            <div class="text-sm text-gray-600 dark:text-gray-400 italic pl-3 border-l-2 border-gray-300">
+                                "${q.a}"
+                            </div>
                         </div>
                     </div>
                 `;
@@ -618,6 +914,7 @@ ORDER BY flight_date ASC;`
             ['dashboard', 'coding', 'sql', 'theory', 'hr'].forEach(id => {
                 document.getElementById(id).classList.add('hidden');
                 document.getElementById('btn-' + id).classList.remove('tab-active');
+                document.getElementById('btn-' + id).classList.remove('bg-blue-50');
             });
             document.getElementById(tabId).classList.remove('hidden');
             document.getElementById('btn-' + tabId).classList.add('tab-active');
@@ -653,13 +950,11 @@ ORDER BY flight_date ASC;`
         function copyCode(elementId) {
             const text = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(text);
-            alert("Code copied to clipboard!");
-        }
-
-        function downloadPDF() {
-            // In a real scenario, this would generate a PDF. 
-            // Here we alert to simulate the action or print.
-            window.print();
+            // Simple toast notification
+            const btn = document.querySelector(`[onclick="copyCode('${elementId}')"]`);
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check text-green-400"></i>';
+            setTimeout(() => btn.innerHTML = originalHTML, 2000);
         }
 
         // --- Init ---
