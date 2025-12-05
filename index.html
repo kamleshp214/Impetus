@@ -7,208 +7,285 @@
     <meta name="description" content="Comprehensive guide for Impetus Technologies interviews.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2563eb;
-            --secondary: #475569;
-            --bg-light: #f8fafc;
-            --bg-dark: #0f172a;
-            --text-light: #334155;
-            --text-dark: #e2e8f0;
+            --bg-body: #0B0E14;
+            --bg-card: #151921;
+            --bg-sidebar: #0f131a;
+            --border-color: #2D3342;
+            --accent-primary: #3b82f6; /* Blue */
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
         }
         
-        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s; }
-        
-        .dark-mode { background-color: var(--bg-dark); color: var(--text-dark); }
-        .dark-mode .card { background-color: #1e293b; border-color: #334155; }
-        .dark-mode .bg-white { background-color: #1e293b; color: var(--text-dark); }
-        .dark-mode .text-gray-600 { color: #94a3b8; }
-        .dark-mode .text-gray-800 { color: #f1f5f9; }
-        .dark-mode .bg-gray-50 { background-color: #0f172a; }
-        .dark-mode .bg-gray-100 { background-color: #1e293b; }
-        .dark-mode input, .dark-mode select { background-color: #334155; color: white; border-color: #475569; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-main);
+            overflow: hidden; /* App-like feel */
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        /* Utilities */
+        .glass-panel {
+            background: rgba(21, 25, 33, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .dev-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+        .dev-card:hover {
+            border-color: #4B5563;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        .nav-item {
+            color: var(--text-muted);
+            border-right: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+            color: #fff;
+        }
+        .tab-active {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+            color: #60A5FA;
+            border-right-color: #60A5FA;
+        }
+
+        /* Coding Environment Look */
+        .code-window {
+            font-family: 'JetBrains Mono', monospace;
+            background: #0d1117; /* GitHub Dark Dimmed */
+            border: 1px solid #30363d;
+            border-radius: 8px;
+        }
+        .code-header {
+            background: #161b22;
+            border-bottom: 1px solid #30363d;
+            padding: 8px 16px;
+            font-size: 0.75rem;
+            color: #8b949e;
+        }
         
         /* Syntax Highlighting Sim */
-        .code-block { font-family: 'Fira Code', monospace; font-size: 0.85rem; }
-        .keyword { color: #c678dd; } 
-        .string { color: #98c379; }
-        .comment { color: #7f848e; font-style: italic; }
-        .function { color: #61afef; }
+        .token-keyword { color: #ff7b72; } 
+        .token-string { color: #a5d6ff; }
+        .token-comment { color: #8b949e; font-style: italic; }
+        .token-func { color: #d2a8ff; }
+        .token-type { color: #79c0ff; }
 
-        .tab-active { border-bottom: 2px solid var(--primary); color: var(--primary); font-weight: 600; background-color: rgba(37, 99, 235, 0.05); }
+        /* Tags */
+        .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; border: 1px solid transparent;}
+        .tag-easy { background: rgba(34, 197, 94, 0.1); color: #4ade80; border-color: rgba(34, 197, 94, 0.2); }
+        .tag-medium { background: rgba(234, 179, 8, 0.1); color: #facc15; border-color: rgba(234, 179, 8, 0.2); }
+        .tag-hard { background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.2); }
         
-        /* Smooth fade */
-        .fade-in { animation: fadeIn 0.4s ease-out; }
+        .fade-in { animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
-        .tag-easy { background: #dcfce7; color: #166534; }
-        .tag-medium { background: #fef9c3; color: #854d0e; }
-        .tag-hard { background: #fee2e2; color: #991b1b; }
-        
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        .dark-mode ::-webkit-scrollbar-thumb { background: #475569; }
+        /* Fancy Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #60A5FA, #A78BFA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 h-screen flex flex-col overflow-hidden">
+<body class="flex flex-col h-screen">
 
-    <!-- Navbar -->
-    <nav class="bg-white border-b border-gray-200 px-6 py-3 flex justify-between items-center shadow-sm z-10">
-        <div class="flex items-center gap-3">
-            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-2 rounded-lg font-bold text-xl shadow-md">IT</div>
+    <!-- Top Bar (IDE Style) -->
+    <header class="h-14 border-b border-[#2D3342] bg-[#0B0E14] flex items-center justify-between px-6 shrink-0 z-20">
+        <div class="flex items-center gap-4">
+            <div class="w-8 h-8 rounded bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold font-mono text-sm shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                IT
+            </div>
             <div>
-                <h1 class="font-bold text-lg leading-tight text-blue-900 dark:text-blue-400">Target Impetus 2025</h1>
-                <p class="text-xs text-gray-500">Premium Preparation Guide • <span class="text-pink-600 font-semibold">For Khushboo</span></p>
+                <h1 class="font-bold text-sm tracking-wide text-gray-200">TARGET <span class="text-blue-400">IMPETUS</span> <span class="text-xs bg-blue-900/30 text-blue-300 px-1.5 py-0.5 rounded ml-2 border border-blue-800">v2.5.0</span></h1>
+                <p class="text-[10px] text-gray-500 font-mono uppercase tracking-widest">Khushboo's Workspace</p>
             </div>
         </div>
-        <div class="flex gap-4 items-center">
-            <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 transition" title="Toggle Dark Mode">
-                <i class="fas fa-moon"></i>
-            </button>
-            <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition flex items-center gap-2 shadow-sm">
-                <i class="fas fa-file-pdf"></i> Save as PDF
+        <div class="flex items-center gap-3">
+            <div class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-[#151921] rounded border border-[#2D3342]">
+                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                <span class="text-xs text-gray-400 font-mono">System Online</span>
+            </div>
+            <button onclick="window.print()" class="text-gray-400 hover:text-white transition p-2 hover:bg-[#151921] rounded" title="Export PDF">
+                <i class="fas fa-file-export"></i>
             </button>
         </div>
-    </nav>
+    </header>
 
-    <!-- Main Layout -->
     <div class="flex flex-1 overflow-hidden">
         
-        <!-- Sidebar Navigation -->
-        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col hidden md:flex transition-all">
-            <div class="p-4 space-y-1">
-                <div class="pb-4 mb-2 border-b border-gray-100 px-2">
-                    <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Preparation Modules</p>
-                </div>
-                <button onclick="switchTab('dashboard')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3 tab-active" id="btn-dashboard">
-                    <i class="fas fa-rocket w-5 text-center"></i> Dashboard
-                </button>
-                <button onclick="switchTab('coding')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3" id="btn-coding">
-                    <i class="fas fa-code w-5 text-center"></i> Coding (25+)
-                </button>
-                <button onclick="switchTab('sql')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3" id="btn-sql">
-                    <i class="fas fa-database w-5 text-center"></i> SQL Queries
-                </button>
-                <button onclick="switchTab('theory')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3" id="btn-theory">
-                    <i class="fas fa-brain w-5 text-center"></i> Core Theory
-                </button>
-                <button onclick="switchTab('hr')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3" id="btn-hr">
-                    <i class="fas fa-user-tie w-5 text-center"></i> HR & Strategy
-                </button>
+        <!-- Sidebar -->
+        <aside class="w-64 bg-sidebar border-r border-[#2D3342] flex flex-col hidden md:flex shrink-0">
+            <div class="p-4">
+                <div class="text-[10px] font-bold text-gray-600 uppercase tracking-wider mb-2 font-mono pl-4">Explorer</div>
+                <nav class="space-y-1">
+                    <button onclick="switchTab('dashboard')" class="nav-item w-full text-left px-4 py-3 rounded hover:bg-[#151921] flex items-center gap-3 tab-active" id="btn-dashboard">
+                        <i class="fas fa-chart-line w-5 text-center text-sm"></i> 
+                        <span class="text-sm font-medium">Dashboard</span>
+                    </button>
+                    <button onclick="switchTab('coding')" class="nav-item w-full text-left px-4 py-3 rounded hover:bg-[#151921] flex items-center gap-3" id="btn-coding">
+                        <i class="fas fa-code w-5 text-center text-sm"></i> 
+                        <span class="text-sm font-medium">Coding Problems</span>
+                    </button>
+                    <button onclick="switchTab('sql')" class="nav-item w-full text-left px-4 py-3 rounded hover:bg-[#151921] flex items-center gap-3" id="btn-sql">
+                        <i class="fas fa-database w-5 text-center text-sm"></i> 
+                        <span class="text-sm font-medium">SQL Console</span>
+                    </button>
+                    <button onclick="switchTab('theory')" class="nav-item w-full text-left px-4 py-3 rounded hover:bg-[#151921] flex items-center gap-3" id="btn-theory">
+                        <i class="fas fa-microchip w-5 text-center text-sm"></i> 
+                        <span class="text-sm font-medium">Core Concepts</span>
+                    </button>
+                    <button onclick="switchTab('hr')" class="nav-item w-full text-left px-4 py-3 rounded hover:bg-[#151921] flex items-center gap-3" id="btn-hr">
+                        <i class="fas fa-user-astronaut w-5 text-center text-sm"></i> 
+                        <span class="text-sm font-medium">HR Protocol</span>
+                    </button>
+                </nav>
             </div>
-            <div class="mt-auto p-4 bg-blue-50 m-4 rounded-xl border border-blue-100">
-                <div class="text-xs text-blue-800 text-center font-medium">
-                    <i class="fas fa-star text-yellow-500 mb-1"></i><br>
-                    "Believe in yourself, Khushboo! You've got this."
+            
+            <div class="mt-auto p-4">
+                <div class="bg-gradient-to-r from-blue-900/20 to-indigo-900/20 border border-blue-500/20 rounded-lg p-4">
+                    <p class="text-xs text-blue-200 italic text-center font-mono">"Consistency is the only algorithm that matters."</p>
                 </div>
             </div>
         </aside>
 
-        <!-- Mobile Menu Button -->
-        <div class="md:hidden absolute bottom-4 right-4 z-50">
-            <button onclick="document.querySelector('aside').classList.toggle('hidden')" class="bg-blue-600 text-white p-4 rounded-full shadow-lg">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
+        <!-- Mobile Menu Toggle -->
+        <button onclick="document.querySelector('aside').classList.toggle('hidden')" class="md:hidden absolute bottom-6 right-6 z-50 w-12 h-12 bg-blue-600 rounded-full shadow-lg text-white flex items-center justify-center">
+            <i class="fas fa-bars"></i>
+        </button>
 
-        <!-- Content Area -->
-        <main class="flex-1 overflow-y-auto p-6 scroll-smooth bg-gray-50 dark:bg-slate-900 relative" id="main-content">
+        <!-- Main Workspace -->
+        <main class="flex-1 overflow-y-auto p-8 relative" id="main-content">
             
-            <!-- Dashboard / Strategy Section -->
-            <section id="dashboard" class="fade-in space-y-6">
-                <!-- Welcome Card -->
-                <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
-                    <div class="relative z-10">
-                        <h2 class="text-3xl font-bold mb-2">Welcome, Khushboo! 👋</h2>
-                        <p class="text-blue-100 max-w-2xl">This is your personalized roadmap to crack Impetus Technologies. We've curated the most repeated questions from the last 3 years, specifically focusing on Big Data, Java, and SQL.</p>
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="fade-in space-y-8 max-w-6xl mx-auto">
+                <!-- Hero Banner -->
+                <div class="relative overflow-hidden rounded-xl border border-blue-500/30 bg-gradient-to-r from-blue-900/40 to-purple-900/40 p-8">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <i class="fas fa-rocket text-9xl text-white"></i>
                     </div>
-                    <i class="fas fa-trophy absolute -right-4 -bottom-4 text-9xl text-white opacity-10"></i>
+                    <h2 class="text-3xl font-bold mb-2">Welcome Back, <span class="text-gradient">Khushboo</span></h2>
+                    <p class="text-gray-400 max-w-xl">Your personalized battle station for the Impetus interview. We've compiled the high-frequency patterns for 2025.</p>
+                    
+                    <div class="flex gap-4 mt-6">
+                        <div class="px-4 py-2 bg-black/30 rounded border border-white/10 flex items-center gap-2">
+                            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                            <span class="text-xs font-mono text-gray-300">Target: SDE I / Data Engineer</span>
+                        </div>
+                        <div class="px-4 py-2 bg-black/30 rounded border border-white/10 flex items-center gap-2">
+                            <i class="fab fa-java text-orange-400 text-xs"></i>
+                            <span class="text-xs font-mono text-gray-300">Stack: Java + Big Data</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 dark:bg-slate-800 dark:border-slate-700">
-                    <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-map-signs text-blue-500"></i> The Impetus Process</h2>
+                <!-- Process Grid -->
+                <div>
+                    <h3 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4 font-mono">Mission Roadmap</h3>
                     <div class="grid md:grid-cols-4 gap-4">
-                        <div class="p-4 bg-blue-50 dark:bg-slate-700 rounded-lg border-l-4 border-blue-500 hover:-translate-y-1 transition duration-300">
-                            <h3 class="font-bold text-blue-900 dark:text-blue-300">Round 1: Online</h3>
-                            <p class="text-xs text-blue-800 dark:text-blue-200 mt-2">
-                                <strong>Platform:</strong> HackerRank/Mettl<br>
-                                <strong>Time:</strong> 90 mins<br>
-                                <strong>Format:</strong> 15 Aptitude, 2 SQL, 2 Coding.
-                            </p>
+                        <div class="dev-card p-5 rounded-lg relative overflow-hidden group">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                            <div class="text-blue-500 mb-2 group-hover:scale-110 transition-transform duration-300"><i class="fas fa-laptop-code text-xl"></i></div>
+                            <h4 class="font-bold text-gray-200">Round 1: Online</h4>
+                            <p class="text-xs text-gray-500 mt-1">90 Mins • HackerRank</p>
+                            <div class="mt-3 text-[10px] text-gray-400 font-mono bg-black/20 p-2 rounded">
+                                > 2 Coding (Easy/Med)<br>> 2 SQL Queries<br>> 15 Aptitude
+                            </div>
                         </div>
-                        <div class="p-4 bg-purple-50 dark:bg-slate-700 rounded-lg border-l-4 border-purple-500 hover:-translate-y-1 transition duration-300">
-                            <h3 class="font-bold text-purple-900 dark:text-purple-300">Round 2: Tech I</h3>
-                            <p class="text-xs text-purple-800 dark:text-purple-200 mt-2">
-                                <strong>Focus:</strong> Core Java (Collections), SQL Joins, Basic DSA.<br>
-                                <strong>Tip:</strong> Be ready to code on Notepad.
-                            </p>
+                        <div class="dev-card p-5 rounded-lg relative overflow-hidden group">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
+                            <div class="text-purple-500 mb-2 group-hover:scale-110 transition-transform duration-300"><i class="fas fa-cogs text-xl"></i></div>
+                            <h4 class="font-bold text-gray-200">Round 2: Tech I</h4>
+                            <p class="text-xs text-gray-500 mt-1">45-60 Mins • 1:1</p>
+                            <div class="mt-3 text-[10px] text-gray-400 font-mono bg-black/20 p-2 rounded">
+                                > Core Java (Map)<br>> SQL Joins<br>> Notepad Coding
+                            </div>
                         </div>
-                        <div class="p-4 bg-orange-50 dark:bg-slate-700 rounded-lg border-l-4 border-orange-500 hover:-translate-y-1 transition duration-300">
-                            <h3 class="font-bold text-orange-900 dark:text-orange-300">Round 3: Tech II</h3>
-                            <p class="text-xs text-orange-800 dark:text-orange-200 mt-2">
-                                <strong>Focus:</strong> Projects, System Design, Puzzles.<br>
-                                <strong>Big Data:</strong> Know Spark/Hive basics if mentioned in resume.
-                            </p>
+                        <div class="dev-card p-5 rounded-lg relative overflow-hidden group">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-orange-500"></div>
+                            <div class="text-orange-500 mb-2 group-hover:scale-110 transition-transform duration-300"><i class="fas fa-project-diagram text-xl"></i></div>
+                            <h4 class="font-bold text-gray-200">Round 3: Tech II</h4>
+                            <p class="text-xs text-gray-500 mt-1">45 Mins • Managerial</p>
+                            <div class="mt-3 text-[10px] text-gray-400 font-mono bg-black/20 p-2 rounded">
+                                > Project Deep Dive<br>> System Design<br>> Logic Puzzles
+                            </div>
                         </div>
-                        <div class="p-4 bg-green-50 dark:bg-slate-700 rounded-lg border-l-4 border-green-500 hover:-translate-y-1 transition duration-300">
-                            <h3 class="font-bold text-green-900 dark:text-green-300">Round 4: HR</h3>
-                            <p class="text-xs text-green-800 dark:text-green-200 mt-2">
-                                <strong>Focus:</strong> Relocation, Stability, Salary.<br>
-                                <strong>Offices:</strong> Noida, Indore, Bangalore.
-                            </p>
+                        <div class="dev-card p-5 rounded-lg relative overflow-hidden group">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-green-500"></div>
+                            <div class="text-green-500 mb-2 group-hover:scale-110 transition-transform duration-300"><i class="fas fa-handshake text-xl"></i></div>
+                            <h4 class="font-bold text-gray-200">Round 4: HR</h4>
+                            <p class="text-xs text-gray-500 mt-1">15 Mins • Final</p>
+                            <div class="mt-3 text-[10px] text-gray-400 font-mono bg-black/20 p-2 rounded">
+                                > Relocation<br>> Salary Check<br>> "Why Impetus?"
+                            </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Cheat Sheet -->
                 <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 dark:bg-slate-800 dark:border-slate-700">
-                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-check-circle text-green-500 mr-2"></i>Daily Checklist</h3>
+                    <div class="dev-card p-6 rounded-lg">
+                        <h3 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fas fa-clipboard-check text-green-400"></i> Daily Runtime Config</h3>
                         <div class="space-y-3">
-                            <label class="flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-slate-700 rounded cursor-pointer">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded"> 
-                                <span class="text-sm">Master <strong>HashMap Internals</strong> (Collision, Buckets).</span>
+                            <label class="flex items-center gap-3 p-3 bg-black/20 rounded border border-transparent hover:border-gray-700 cursor-pointer transition">
+                                <input type="checkbox" class="w-4 h-4 bg-gray-800 border-gray-600 rounded text-blue-500 focus:ring-0"> 
+                                <span class="text-sm text-gray-300">Master <strong>HashMap Internals</strong> (Collision/Buckets)</span>
                             </label>
-                            <label class="flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-slate-700 rounded cursor-pointer">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded"> 
-                                <span class="text-sm">Practice <strong>SQL Self-Joins</strong> & Window Functions.</span>
+                            <label class="flex items-center gap-3 p-3 bg-black/20 rounded border border-transparent hover:border-gray-700 cursor-pointer transition">
+                                <input type="checkbox" class="w-4 h-4 bg-gray-800 border-gray-600 rounded text-blue-500 focus:ring-0"> 
+                                <span class="text-sm text-gray-300">Practice <strong>SQL Self-Joins</strong> & Window Funcs</span>
                             </label>
-                            <label class="flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-slate-700 rounded cursor-pointer">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded"> 
-                                <span class="text-sm">Solve 1 DP & 1 Tree problem daily.</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-slate-700 rounded cursor-pointer">
-                                <input type="checkbox" class="w-4 h-4 text-blue-600 rounded"> 
-                                <span class="text-sm">Prepare "Tell me about your Project" (STAR format).</span>
+                            <label class="flex items-center gap-3 p-3 bg-black/20 rounded border border-transparent hover:border-gray-700 cursor-pointer transition">
+                                <input type="checkbox" class="w-4 h-4 bg-gray-800 border-gray-600 rounded text-blue-500 focus:ring-0"> 
+                                <span class="text-sm text-gray-300">Solve 1 DP & 1 Tree problem</span>
                             </label>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 dark:bg-slate-800 dark:border-slate-700">
-                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-building text-gray-500 mr-2"></i>Why Impetus? (Cheat Sheet)</h3>
-                        <div class="text-sm text-gray-600 dark:text-gray-300 space-y-3">
-                            <p>Use these points when they ask "Why do you want to join us?":</p>
-                            <ul class="list-disc pl-5 space-y-1">
-                                <li><strong>Big Data Leader:</strong> "I admire Impetus for its deep expertise in Data Engineering and Modernization."</li>
-                                <li><strong>Products:</strong> "I'm excited about products like <strong>Gathr</strong> (ETL platform) and <strong>LeapLogic</strong> (Cloud migration)."</li>
-                                <li><strong>Learning Culture:</strong> "I've read about the strong internal learning culture and labs at Impetus."</li>
-                            </ul>
+                    <div class="dev-card p-6 rounded-lg">
+                        <h3 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fas fa-terminal text-orange-400"></i> Why Impetus? (CLI Output)</h3>
+                        <div class="code-window p-4 text-xs">
+                            <p class="text-green-400">$ cat why_impetus.txt</p>
+                            <p class="text-gray-300 mt-2">1. <span class="text-yellow-300">Big Data Authority:</span> Deep expertise in Data Engineering & Modernization.</p>
+                            <p class="text-gray-300 mt-1">2. <span class="text-yellow-300">Product Suite:</span> Gathr (ETL) & LeapLogic (Cloud Migration).</p>
+                            <p class="text-gray-300 mt-1">3. <span class="text-yellow-300">Culture:</span> Strong internal labs and focus on R&D.</p>
+                            <p class="text-gray-500 mt-2"># Use these points during the HR round.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Coding Section -->
-            <section id="coding" class="hidden fade-in space-y-4">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
+            <section id="coding" class="hidden fade-in space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-[#2D3342] pb-6">
                     <div>
-                        <h2 class="text-2xl font-bold">Coding Question Bank</h2>
-                        <p class="text-sm text-gray-500">25+ most frequently asked questions</p>
+                        <h2 class="text-2xl font-bold text-white">Coding Repository</h2>
+                        <p class="text-sm text-gray-500 font-mono">git fetch origin interview-questions</p>
                     </div>
-                    <div class="flex gap-2 w-full md:w-auto">
-                        <input type="text" id="codingSearch" placeholder="Search (e.g. 'Tree', 'Array')" class="border rounded-lg px-4 py-2 text-sm w-full md:w-64 dark:text-black focus:ring-2 focus:ring-blue-500 outline-none" onkeyup="filterCoding()">
-                        <select id="codingFilter" class="border rounded-lg px-2 py-2 text-sm dark:text-black bg-white" onchange="filterCoding()">
-                            <option value="all">All Topics</option>
+                    <div class="flex gap-3 w-full md:w-auto">
+                        <div class="relative w-full md:w-64">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-500 text-xs"></i>
+                            <input type="text" id="codingSearch" placeholder="Search problems..." class="w-full bg-[#0B0E14] border border-[#2D3342] rounded px-8 py-2 text-sm text-gray-300 focus:border-blue-500 focus:outline-none" onkeyup="filterCoding()">
+                        </div>
+                        <select id="codingFilter" class="bg-[#0B0E14] border border-[#2D3342] rounded px-3 py-2 text-sm text-gray-300 focus:border-blue-500 focus:outline-none" onchange="filterCoding()">
+                            <option value="all">All Modules</option>
                             <option value="Array">Arrays</option>
                             <option value="String">Strings</option>
                             <option value="LinkedList">Linked List</option>
@@ -224,32 +301,34 @@
             </section>
 
             <!-- SQL Section -->
-            <section id="sql" class="hidden fade-in">
-                <h2 class="text-2xl font-bold mb-6">SQL Interview Mastery</h2>
-                <div class="flex flex-col lg:flex-row gap-6 h-[calc(100vh-150px)]">
+            <section id="sql" class="hidden fade-in h-full">
+                <div class="flex flex-col lg:flex-row gap-6 h-[calc(100vh-140px)]">
                     <!-- Left: Schema Reference -->
-                    <div class="lg:w-1/3 bg-white p-5 rounded-xl shadow-sm border border-gray-100 overflow-y-auto dark:bg-slate-800 dark:border-slate-700">
-                        <h3 class="font-bold text-gray-700 dark:text-gray-200 mb-3 border-b pb-2">Reference Schema</h3>
-                        
-                        <div class="mb-6">
-                            <h4 class="font-semibold text-sm text-blue-600 mb-2">Table: Employees</h4>
-                            <div class="text-xs font-mono bg-gray-50 dark:bg-slate-900 p-3 rounded border dark:border-slate-600">
-                                | emp_id | name   | dept_id | salary | manager_id |<br>
-                                |--------|--------|---------|--------|------------|<br>
-                                | 1      | Alice  | 101     | 80000  | 3          |<br>
-                                | 2      | Bob    | 102     | 65000  | 3          |<br>
-                                | 3      | Charlie| 101     | 90000  | NULL       |<br>
-                                | 4      | David  | 102     | 65000  | 2          |
-                            </div>
+                    <div class="lg:w-1/3 dev-card p-0 rounded-lg overflow-hidden flex flex-col">
+                        <div class="bg-[#1e232e] p-3 border-b border-[#2D3342] flex justify-between items-center">
+                            <h3 class="font-bold text-gray-300 text-sm"><i class="fas fa-database text-blue-500 mr-2"></i>Schema Explorer</h3>
                         </div>
-
-                        <div>
-                            <h4 class="font-semibold text-sm text-blue-600 mb-2">Table: Orders</h4>
-                            <div class="text-xs font-mono bg-gray-50 dark:bg-slate-900 p-3 rounded border dark:border-slate-600">
-                                | id | cust_id | amount | order_date |<br>
-                                |----|---------|--------|------------|<br>
-                                | 1  | 101     | 500    | 2024-01-01 |<br>
-                                | 2  | 102     | 200    | 2024-01-02 |
+                        <div class="p-4 overflow-y-auto space-y-6 flex-1">
+                            <div>
+                                <h4 class="font-mono text-xs text-blue-400 mb-2 flex items-center gap-2"><i class="fas fa-table"></i> Employees</h4>
+                                <div class="code-window p-3 text-[10px] text-gray-400">
+                                    <div class="grid grid-cols-5 gap-2 border-b border-gray-700 pb-1 mb-1 font-bold text-gray-300">
+                                        <span>id</span><span>name</span><span>dept</span><span>sal</span><span>mgr</span>
+                                    </div>
+                                    <div class="grid grid-cols-5 gap-2"><span>1</span><span>Alice</span><span>101</span><span>80k</span><span>3</span></div>
+                                    <div class="grid grid-cols-5 gap-2"><span>2</span><span>Bob</span><span>102</span><span>65k</span><span>3</span></div>
+                                    <div class="grid grid-cols-5 gap-2"><span>3</span><span>Charlie</span><span>101</span><span>90k</span><span>NULL</span></div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-mono text-xs text-blue-400 mb-2 flex items-center gap-2"><i class="fas fa-table"></i> Orders</h4>
+                                <div class="code-window p-3 text-[10px] text-gray-400">
+                                    <div class="grid grid-cols-4 gap-2 border-b border-gray-700 pb-1 mb-1 font-bold text-gray-300">
+                                        <span>id</span><span>cust_id</span><span>amt</span><span>date</span>
+                                    </div>
+                                    <div class="grid grid-cols-4 gap-2"><span>1</span><span>101</span><span>500</span><span>Jan-01</span></div>
+                                    <div class="grid grid-cols-4 gap-2"><span>2</span><span>102</span><span>200</span><span>Jan-02</span></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -263,15 +342,10 @@
 
             <!-- Theory Section -->
             <section id="theory" class="hidden fade-in space-y-6">
-                <div class="flex justify-between items-end">
+                <div class="flex justify-between items-end border-b border-[#2D3342] pb-4">
                     <div>
-                        <h2 class="text-2xl font-bold">Technical Theory</h2>
-                        <p class="text-sm text-gray-500">Core CS Concepts & Big Data</p>
-                    </div>
-                    <div class="flex gap-2 text-xs">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">Java</span>
-                        <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full">Big Data</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full">OS/DBMS</span>
+                        <h2 class="text-2xl font-bold text-white">Technical Documentation</h2>
+                        <p class="text-sm text-gray-500 font-mono">Core CS Concepts & Big Data Fundamentals</p>
                     </div>
                 </div>
                 
@@ -281,8 +355,11 @@
             </section>
 
             <!-- HR Section -->
-            <section id="hr" class="hidden fade-in max-w-4xl mx-auto">
-                <h2 class="text-2xl font-bold mb-6 text-center">HR & Managerial Round Strategy</h2>
+            <section id="hr" class="hidden fade-in max-w-4xl mx-auto space-y-6">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-white">Behavioral Protocol</h2>
+                    <p class="text-sm text-gray-500">Optimized responses for human interaction</p>
+                </div>
                 
                 <div class="space-y-6" id="hr-container">
                     <!-- Populated by JS -->
@@ -293,7 +370,7 @@
     </div>
 
     <script>
-        // --- EXPANDED Data Source ---
+        // --- Data Source ---
         
         const codingQuestions = [
             {
@@ -301,7 +378,11 @@
                 prob: "Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.",
                 codeJava: `public int firstUniqChar(String s) {
     int[] count = new int[26];
-    for (char c : s.toCharArray()) count[c - 'a']++;
+    // 1st Pass: Count frequencies
+    for (char c : s.toCharArray()) 
+        count[c - 'a']++;
+    
+    // 2nd Pass: Find first with count 1
     for (int i = 0; i < s.length(); i++) {
         if (count[s.charAt(i) - 'a'] == 1) return i;
     }
@@ -309,8 +390,11 @@
 }`,
                 codePy: `def firstUniqChar(s):
     count = {}
+    # Count frequencies
     for c in s:
         count[c] = count.get(c, 0) + 1
+        
+    # Find first unique
     for i, c in enumerate(s):
         if count[c] == 1:
             return i
@@ -322,8 +406,10 @@
                 codeJava: `public List<List<Integer>> levelOrder(Node root) {
     List<List<Integer>> res = new ArrayList<>();
     if (root == null) return res;
+    
     Queue<Node> q = new LinkedList<>();
     q.offer(root);
+    
     while (!q.isEmpty()) {
         int size = q.size();
         List<Integer> level = new ArrayList<>();
@@ -350,14 +436,18 @@
     return res`
             },
             {
-                id: 3, title: "Sort Array of 0s, 1s, and 2s", topic: "Array", diff: "Medium", freq: "High", year: "2022",
-                prob: "Sort an array consisting of 0, 1, and 2 without using any sorting algo (Dutch National Flag).",
+                id: 3, title: "Sort Colors (0, 1, 2)", topic: "Array", diff: "Medium", freq: "High", year: "2022",
+                prob: "Sort an array consisting of 0, 1, and 2 without using any sorting algo (Dutch National Flag Algorithm).",
                 codeJava: `public void sortColors(int[] nums) {
     int low = 0, mid = 0, high = nums.length - 1;
     while (mid <= high) {
-        if (nums[mid] == 0) swap(nums, low++, mid++);
-        else if (nums[mid] == 1) mid++;
-        else swap(nums, mid, high--);
+        if (nums[mid] == 0) {
+            swap(nums, low++, mid++);
+        } else if (nums[mid] == 1) {
+            mid++;
+        } else {
+            swap(nums, mid, high--);
+        }
     }
 }`,
                 codePy: `def sortColors(nums):
@@ -397,16 +487,18 @@
     return res`
             },
             {
-                id: 5, title: "Find Duplicate in Array", topic: "Array", diff: "Easy", freq: "High", year: "2024",
+                id: 5, title: "Find Duplicate Number (Floyd's)", topic: "Array", diff: "Easy", freq: "High", year: "2024",
                 prob: "Given an array of integers containing n + 1 integers where each integer is in the range [1, n] inclusive, find the duplicate number.",
-                codeJava: `// Floyd's Cycle Detection
+                codeJava: `// Floyd's Cycle Detection (Tortoise & Hare)
 public int findDuplicate(int[] nums) {
     int slow = nums[0], fast = nums[0];
+    // 1. Find collision point
     do {
         slow = nums[slow];
         fast = nums[nums[fast]];
     } while (slow != fast);
     
+    // 2. Find entrance to cycle
     slow = nums[0];
     while (slow != fast) {
         slow = nums[slow];
@@ -427,7 +519,7 @@ public int findDuplicate(int[] nums) {
         fast = nums[fast]
     return slow`
             },
-             {
+            {
                 id: 6, title: "Reverse Linked List", topic: "LinkedList", diff: "Easy", freq: "Frequent", year: "2022",
                 prob: "Reverse a singly linked list.",
                 codeJava: `public ListNode reverseList(ListNode head) {
@@ -447,40 +539,13 @@ public int findDuplicate(int[] nums) {
         curr.next, prev, curr = prev, curr, curr.next
     return prev`
             },
-             {
-                id: 7, title: "N-th Node From End of List", topic: "LinkedList", diff: "Medium", freq: "Medium", year: "2023",
-                prob: "Given the head of a linked list, remove the nth node from the end of the list and return its head.",
-                codeJava: `public ListNode removeNthFromEnd(ListNode head, int n) {
-    ListNode dummy = new ListNode(0);
-    dummy.next = head;
-    ListNode fast = dummy, slow = dummy;
-    for (int i = 0; i <= n; i++) fast = fast.next;
-    while (fast != null) {
-        fast = fast.next;
-        slow = slow.next;
-    }
-    slow.next = slow.next.next;
-    return dummy.next;
-}`,
-                codePy: `def removeNthFromEnd(head, n):
-    dummy = ListNode(0, head)
-    left = dummy
-    right = head
-    while n > 0:
-        right = right.next
-        n -= 1
-    while right:
-        left = left.next
-        right = right.next
-    left.next = left.next.next
-    return dummy.next`
-            },
-             {
-                id: 8, title: "Longest Substring Without Repeating", topic: "String", diff: "Medium", freq: "High", year: "2024",
+            {
+                id: 8, title: "Longest Substring No Repeats", topic: "String", diff: "Medium", freq: "High", year: "2024",
                 prob: "Find the length of the longest substring without repeating characters.",
                 codeJava: `public int lengthOfLongestSubstring(String s) {
     int n = s.length(), ans = 0;
     Map<Character, Integer> map = new HashMap<>(); 
+    // Sliding Window
     for (int j = 0, i = 0; j < n; j++) {
         if (map.containsKey(s.charAt(j))) {
             i = Math.max(map.get(s.charAt(j)), i);
@@ -526,30 +591,6 @@ public int findDuplicate(int[] nums) {
     return not stack`
             },
             {
-                id: 10, title: "Merge Two Sorted Lists", topic: "LinkedList", diff: "Easy", freq: "High", year: "2023",
-                prob: "Merge two sorted linked lists and return it as a sorted list.",
-                codeJava: `public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-    if(l1 == null) return l2;
-    if(l2 == null) return l1;
-    if(l1.val < l2.val){
-        l1.next = mergeTwoLists(l1.next, l2);
-        return l1;
-    } else{
-        l2.next = mergeTwoLists(l1, l2.next);
-        return l2;
-    }
-}`,
-                codePy: `def mergeTwoLists(l1, l2):
-    if not l1: return l2
-    if not l2: return l1
-    if l1.val < l2.val:
-        l1.next = mergeTwoLists(l1.next, l2)
-        return l1
-    else:
-        l2.next = mergeTwoLists(l1, l2.next)
-        return l2`
-            },
-            {
                 id: 11, title: "Best Time to Buy and Sell Stock", topic: "DP", diff: "Easy", freq: "High", year: "2024",
                 prob: "Maximize profit by choosing a single day to buy and a different day in the future to sell.",
                 codeJava: `public int maxProfit(int[] prices) {
@@ -557,7 +598,8 @@ public int findDuplicate(int[] nums) {
     int maxProfit = 0;
     for(int price : prices) {
         if(price < minPrice) minPrice = price;
-        else if(price - minPrice > maxProfit) maxProfit = price - minPrice;
+        else if(price - minPrice > maxProfit) 
+            maxProfit = price - minPrice;
     }
     return maxProfit;
 }`,
@@ -572,31 +614,12 @@ public int findDuplicate(int[] nums) {
     return max_profit`
             },
             {
-                id: 12, title: "Group Anagrams", topic: "String", diff: "Medium", freq: "Medium", year: "2023",
-                prob: "Given an array of strings, group the anagrams together.",
-                codeJava: `public List<List<String>> groupAnagrams(String[] strs) {
-    if (strs.length == 0) return new ArrayList<>();
-    Map<String, List<String>> map = new HashMap<>();
-    for (String s : strs) {
-        char[] ca = s.toCharArray();
-        Arrays.sort(ca);
-        String key = String.valueOf(ca);
-        if (!map.containsKey(key)) map.put(key, new ArrayList<>());
-        map.get(key).add(s);
-    }
-    return new ArrayList<>(map.values());
-}`,
-                codePy: `def groupAnagrams(strs):
-    ans = collections.defaultdict(list)
-    for s in strs:
-        ans[tuple(sorted(s))].append(s)
-    return ans.values()`
-            },
-            {
                 id: 13, title: "Maximum Subarray (Kadane's)", topic: "Array", diff: "Easy", freq: "Very High", year: "2022",
                 prob: "Find the contiguous subarray (containing at least one number) which has the largest sum.",
                 codeJava: `public int maxSubArray(int[] nums) {
-    int maxSoFar = nums[0], maxEndingHere = nums[0];
+    int maxSoFar = nums[0];
+    int maxEndingHere = nums[0];
+    
     for (int i = 1; i < nums.length; i++) {
         maxEndingHere = Math.max(nums[i], maxEndingHere + nums[i]);
         maxSoFar = Math.max(maxSoFar, maxEndingHere);
@@ -610,69 +633,6 @@ public int findDuplicate(int[] nums) {
         max_ending_here = max(nums[i], max_ending_here + nums[i])
         max_so_far = max(max_so_far, max_ending_here)
     return max_so_far`
-            },
-            {
-                id: 14, title: "Detect Loop in Linked List", topic: "LinkedList", diff: "Easy", freq: "High", year: "2024",
-                prob: "Determine if a linked list has a cycle in it.",
-                codeJava: `public boolean hasCycle(ListNode head) {
-    if (head == null) return false;
-    ListNode slow = head;
-    ListNode fast = head.next;
-    while (slow != fast) {
-        if (fast == null || fast.next == null) return false;
-        slow = slow.next;
-        fast = fast.next.next;
-    }
-    return true;
-}`,
-                codePy: `def hasCycle(head):
-    if not head: return False
-    slow = head
-    fast = head.next
-    while slow != fast:
-        if not fast or not fast.next: return False
-        slow = slow.next
-        fast = fast.next.next
-    return True`
-            },
-            {
-                id: 15, title: "Symmetric Tree", topic: "Tree", diff: "Easy", freq: "Medium", year: "2023",
-                prob: "Check whether a binary tree is a mirror of itself (symmetric around its center).",
-                codeJava: `public boolean isSymmetric(TreeNode root) {
-    return root==null || isMirror(root.left, root.right);
-}
-boolean isMirror(TreeNode t1, TreeNode t2){
-    if(t1==null && t2==null) return true;
-    if(t1==null || t2==null) return false;
-    return (t1.val==t2.val) && isMirror(t1.right, t2.left) && isMirror(t1.left, t2.right);
-}`,
-                codePy: `def isSymmetric(root):
-    if not root: return True
-    def isMirror(t1, t2):
-        if not t1 and not t2: return True
-        if not t1 or not t2: return False
-        return (t1.val == t2.val) and isMirror(t1.right, t2.left) and isMirror(t1.left, t2.right)
-    return isMirror(root.left, root.right)`
-            },
-            {
-                id: 16, title: "Climbing Stairs", topic: "DP", diff: "Easy", freq: "Medium", year: "2023",
-                prob: "You are climbing a staircase. It takes n steps to reach the top. Each time you can either climb 1 or 2 steps. How many distinct ways can you climb to the top?",
-                codeJava: `public int climbStairs(int n) {
-    if(n <= 2) return n;
-    int a = 1, b = 2;
-    for(int i = 3; i <= n; i++) {
-        int sum = a + b;
-        a = b;
-        b = sum;
-    }
-    return b;
-}`,
-                codePy: `def climbStairs(n):
-    if n <= 2: return n
-    a, b = 1, 2
-    for i in range(3, n + 1):
-        a, b = b, a + b
-    return b`
             }
         ];
 
@@ -726,51 +686,12 @@ WHERE (e.dept_id, e.salary) IN (
 );`
             },
             {
-                title: "Rising Temperature",
-                desc: "Find all dates' Id with higher temperatures compared to its previous dates (yesterday).",
-                query: `SELECT w1.id
-FROM Weather w1
-JOIN Weather w2 
-ON DATEDIFF(w1.recordDate, w2.recordDate) = 1
-WHERE w1.temperature > w2.temperature;`
-            },
-            {
-                title: "Classes More Than 5 Students",
-                desc: "List out all classes which have more than or equal to 5 students.",
-                query: `SELECT class
-FROM Courses
-GROUP BY class
-HAVING COUNT(student) >= 5;`
-            },
-            {
-                title: "Swap Salary",
-                desc: "Swap all 'f' and 'm' values with a single update statement and no intermediate temp table.",
-                query: `UPDATE Salary
-SET sex = CASE 
-    WHEN sex = 'm' THEN 'f' 
-    ELSE 'm' 
-END;`
-            },
-            {
                 title: "Find Flights within Budget",
                 desc: "Find origin and destination of flights with cost < 6000 ordered by date.",
                 query: `SELECT origin, dest 
 FROM Flights 
 WHERE cost < 6000 
 ORDER BY flight_date ASC;`
-            },
-            {
-                title: "Customers Who Never Order",
-                desc: "Find customers who have never ordered anything.",
-                query: `SELECT name as Customers
-FROM Customers
-WHERE id NOT IN (SELECT cust_id FROM Orders);
-
--- OR Left Join
-SELECT c.name 
-FROM Customers c
-LEFT JOIN Orders o ON c.id = o.cust_id
-WHERE o.id IS NULL;`
             }
         ];
 
@@ -778,16 +699,11 @@ WHERE o.id IS NULL;`
             { cat: "Java Core", q: "HashMap vs ConcurrentHashMap?", a: "HashMap is non-thread-safe and fast. ConcurrentHashMap is thread-safe, using 'Lock Stripping' (segments) to allow concurrent reads/writes without locking the whole map." },
             { cat: "Java Core", q: "Equals vs HashCode Contract?", a: "1) If equal, must have same hashCode. 2) If same hashCode, NOT necessarily equal (Collision). 3) Always override both." },
             { cat: "Java Core", q: "What is the Diamond Problem?", a: "Ambiguity in multiple inheritance when a class inherits 2 classes having same method. Java avoids this by not allowing multiple class inheritance (only via Interfaces)." },
-            { cat: "Java Core", q: "Final, Finally, Finalize?", a: "Final: Constant/Non-inheritable. Finally: Block always executed in try-catch. Finalize: Method called by Garbage Collector before deletion." },
-            
             { cat: "Big Data", q: "What is CAP Theorem?", a: "In a distributed system, you can only pick 2: Consistency, Availability, Partition Tolerance. (NoSQL DBs usually sacrifice C or A)." },
             { cat: "Big Data", q: "RDD vs DataFrame (Spark)?", a: "RDD: Low-level, immutable collection, no optimization. DataFrame: High-level, organized into named columns, optimized by Catalyst Optimizer." },
-            { cat: "Big Data", q: "HDFS Architecture?", a: "Master-Slave. NameNode stores metadata (file paths), DataNodes store actual data blocks. Replication factor (default 3) ensures fault tolerance." },
-            
             { cat: "OS & DBMS", q: "Deadlock & Banker's Algorithm?", a: "Deadlock: Processes waiting for each other forever. Banker's Algo: Avoids deadlock by checking if resource allocation leaves system in 'Safe State'." },
             { cat: "OS & DBMS", q: "ACID Properties?", a: "Atomicity (All or nothing), Consistency (Valid state), Isolation (No interference), Durability (Saved forever)." },
-            { cat: "OS & DBMS", q: "Normalization (BCNF)?", a: "Removing redundancy. BCNF is stricter 3NF: For dependency X->Y, X must be a superkey." },
-            { cat: "OS & DBMS", q: "Process vs Thread?", a: "Process: Independent program execution, separate memory. Thread: Light-weight unit within a process, shares memory." }
+            { cat: "OS & DBMS", q: "Normalization (BCNF)?", a: "Removing redundancy. BCNF is stricter 3NF: For dependency X->Y, X must be a superkey." }
         ];
 
         const hrQuestions = [
@@ -811,40 +727,45 @@ WHERE o.id IS NULL;`
             });
 
             if (filtered.length === 0) {
-                container.innerHTML = '<div class="text-center text-gray-500 py-10 italic">No questions found. Try a different filter!</div>';
+                container.innerHTML = '<div class="text-center text-gray-500 py-10 font-mono text-sm opacity-50">// No matching functions found in repository.</div>';
                 return;
             }
 
             filtered.forEach(q => {
                 const div = document.createElement("div");
-                div.className = "card bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition dark:bg-slate-800 dark:border-slate-700";
+                div.className = "dev-card p-5 rounded-lg";
                 div.innerHTML = `
-                    <div class="flex justify-between items-start mb-2">
+                    <div class="flex justify-between items-start mb-3">
                         <div>
-                            <h3 class="font-bold text-lg text-blue-700 dark:text-blue-400 flex items-center gap-2">
+                            <h3 class="font-bold text-base text-blue-400 font-mono tracking-tight flex items-center gap-2">
                                 ${q.title}
-                                ${q.freq === 'Very High' ? '<span class="text-[10px] bg-red-100 text-red-600 px-2 py-0.5 rounded-full animate-pulse">🔥 Hot</span>' : ''}
+                                ${q.freq === 'Very High' ? '<span class="text-[9px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full border border-red-500/30">🔥 HOT</span>' : ''}
                             </h3>
                             <div class="flex gap-2 mt-2">
                                 <span class="tag ${q.diff === 'Easy' ? 'tag-easy' : q.diff === 'Medium' ? 'tag-medium' : 'tag-hard'}">${q.diff}</span>
-                                <span class="tag bg-gray-100 text-gray-600 dark:bg-slate-700 dark:text-gray-300">${q.topic}</span>
-                                <span class="tag bg-blue-50 text-blue-500 dark:bg-slate-700 dark:text-blue-300">Asked: ${q.year}</span>
+                                <span class="tag bg-gray-800 text-gray-400 border-gray-700">${q.topic}</span>
+                                <span class="tag bg-blue-900/30 text-blue-300 border-blue-800">Freq: ${q.freq}</span>
                             </div>
                         </div>
-                        <button onclick="toggleSol(${q.id})" class="text-sm font-semibold text-blue-600 hover:text-blue-800 dark:text-blue-400 bg-blue-50 dark:bg-slate-700 px-3 py-1 rounded transition">
-                            <i class="fas fa-eye mr-1"></i> Solution
+                        <button onclick="toggleSol(${q.id})" class="text-xs font-mono text-gray-400 hover:text-white bg-[#1e232e] border border-gray-700 px-3 py-1.5 rounded transition flex items-center gap-2">
+                            <i class="fas fa-terminal"></i> Source
                         </button>
                     </div>
-                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">${q.prob}</p>
+                    <p class="text-sm text-gray-400 mb-4 leading-relaxed">${q.prob}</p>
                     
-                    <div id="sol-${q.id}" class="hidden mt-4 border-t dark:border-slate-700 pt-3">
-                        <div class="flex gap-4 mb-2 text-xs font-bold text-gray-500 uppercase tracking-wider">
-                            <button onclick="showCode(${q.id}, 'java')" class="hover:text-blue-600 transition" id="btn-java-${q.id}">Java</button>
-                            <button onclick="showCode(${q.id}, 'py')" class="hover:text-blue-600 transition" id="btn-py-${q.id}">Python</button>
+                    <div id="sol-${q.id}" class="hidden mt-4 pt-3 border-t border-gray-800 animate-fade-in">
+                        <div class="flex gap-4 mb-2 text-[10px] font-bold text-gray-500 uppercase tracking-wider font-mono">
+                            <button onclick="showCode(${q.id}, 'java')" class="hover:text-blue-400 transition" id="btn-java-${q.id}">[ Java ]</button>
+                            <button onclick="showCode(${q.id}, 'py')" class="hover:text-blue-400 transition" id="btn-py-${q.id}">[ Python ]</button>
                         </div>
-                        <div class="bg-slate-900 text-gray-200 p-4 rounded-lg overflow-x-auto text-xs font-mono relative shadow-inner">
-                            <button onclick="copyCode('code-block-${q.id}')" class="absolute top-2 right-2 text-gray-500 hover:text-white transition"><i class="fas fa-copy"></i></button>
-                            <pre id="code-block-${q.id}">${q.codeJava}</pre>
+                        <div class="code-window">
+                            <div class="code-header flex justify-between items-center">
+                                <span>Solution.java</span>
+                                <button onclick="copyCode('code-block-${q.id}')" class="hover:text-white transition"><i class="fas fa-copy"></i></button>
+                            </div>
+                            <div class="p-4 overflow-x-auto">
+                                <pre id="code-block-${q.id}" class="text-xs text-gray-300 font-mono">${q.codeJava}</pre>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -856,14 +777,19 @@ WHERE o.id IS NULL;`
             const container = document.getElementById("sql-container");
             sqlQuestions.forEach((q, idx) => {
                 container.innerHTML += `
-                    <div class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm dark:bg-slate-800 dark:border-slate-700 hover:shadow-md transition">
-                        <div class="flex items-start gap-3 mb-2">
-                             <span class="bg-blue-100 text-blue-700 font-bold text-xs w-6 h-6 flex items-center justify-center rounded-full mt-0.5">${idx + 1}</span>
-                             <h3 class="font-bold text-lg text-slate-700 dark:text-slate-200">${q.title}</h3>
+                    <div class="dev-card p-5 rounded-lg group">
+                        <div class="flex items-start gap-3 mb-3">
+                             <span class="font-mono text-blue-500 opacity-50 text-sm">0${idx + 1}</span>
+                             <h3 class="font-bold text-gray-200">${q.title}</h3>
                         </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 ml-9">${q.desc}</p>
-                        <div class="ml-9 bg-slate-900 text-blue-300 p-3 rounded-lg text-sm font-mono overflow-x-auto border-l-4 border-blue-500">
-                            <pre>${q.query}</pre>
+                        <p class="text-sm text-gray-400 mb-4 font-light pl-8">${q.desc}</p>
+                        <div class="pl-8">
+                            <div class="code-window">
+                                <div class="code-header text-xs text-green-500/70 font-mono">mysql> query_editor.sql</div>
+                                <div class="p-3 overflow-x-auto text-sm font-mono text-gray-300">
+                                    <pre>${q.query}</pre>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -873,17 +799,21 @@ WHERE o.id IS NULL;`
         function renderTheory() {
             const container = document.getElementById("theory-container");
             theoryQuestions.forEach(q => {
-                // Determine color based on category
-                let borderClass = "border-l-4 border-gray-300";
-                if(q.cat.includes("Java")) borderClass = "border-l-4 border-blue-400";
-                if(q.cat.includes("Big Data")) borderClass = "border-l-4 border-orange-400";
-                if(q.cat.includes("OS")) borderClass = "border-l-4 border-green-400";
+                // Determine accent color
+                let accent = "border-gray-700";
+                let icon = "fa-code";
+                let textCol = "text-gray-400";
+                
+                if(q.cat.includes("Java")) { accent = "border-blue-500/50"; icon="fab fa-java"; textCol="text-blue-400"; }
+                if(q.cat.includes("Big Data")) { accent = "border-orange-500/50"; icon="fas fa-database"; textCol="text-orange-400"; }
+                if(q.cat.includes("OS")) { accent = "border-green-500/50"; icon="fas fa-server"; textCol="text-green-400"; }
 
                 container.innerHTML += `
-                    <div class="bg-white p-5 rounded-lg border border-gray-100 shadow-sm dark:bg-slate-800 dark:border-slate-700 ${borderClass} hover:shadow-md transition">
-                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">${q.cat}</span>
-                        <h4 class="font-bold text-gray-800 dark:text-gray-200 mt-1 mb-2 text-base">${q.q}</h4>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">${q.a}</p>
+                    <div class="dev-card p-5 rounded-lg border-l-2 ${accent.replace('border', 'border-l')} relative overflow-hidden">
+                        <div class="absolute right-2 top-2 opacity-5 text-4xl"><i class="${icon}"></i></div>
+                        <span class="text-[10px] font-bold ${textCol} uppercase tracking-widest font-mono mb-2 block">${q.cat}</span>
+                        <h4 class="font-bold text-gray-200 mt-1 mb-2 text-sm">${q.q}</h4>
+                        <p class="text-sm text-gray-400 leading-relaxed font-light">${q.a}</p>
                     </div>
                 `;
             });
@@ -894,12 +824,12 @@ WHERE o.id IS NULL;`
             hrQuestions.forEach(q => {
                 container.innerHTML += `
                     <div class="flex gap-4 group">
-                        <div class="w-10 h-10 rounded-full bg-blue-50 dark:bg-slate-700 flex items-center justify-center text-blue-600 dark:text-blue-400 flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
-                            <i class="fas fa-comment-dots"></i>
+                        <div class="w-10 h-10 rounded bg-[#1e232e] border border-gray-700 flex items-center justify-center text-blue-500 flex-shrink-0">
+                            <i class="fas fa-user"></i>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 dark:bg-slate-800 dark:border-slate-700 flex-1 relative">
-                            <h4 class="font-bold text-gray-800 dark:text-gray-200 mb-2">${q.q}</h4>
-                            <div class="text-sm text-gray-600 dark:text-gray-400 italic pl-3 border-l-2 border-gray-300">
+                        <div class="dev-card p-5 rounded-lg flex-1 relative bubble-arrow">
+                            <h4 class="font-bold text-gray-200 mb-2 text-sm">${q.q}</h4>
+                            <div class="text-sm text-gray-400 italic pl-3 border-l-2 border-blue-500/30">
                                 "${q.a}"
                             </div>
                         </div>
@@ -914,20 +844,17 @@ WHERE o.id IS NULL;`
             ['dashboard', 'coding', 'sql', 'theory', 'hr'].forEach(id => {
                 document.getElementById(id).classList.add('hidden');
                 document.getElementById('btn-' + id).classList.remove('tab-active');
-                document.getElementById('btn-' + id).classList.remove('bg-blue-50');
+                document.getElementById('btn-' + id).classList.remove('bg-[#151921]');
             });
             document.getElementById(tabId).classList.remove('hidden');
             document.getElementById('btn-' + tabId).classList.add('tab-active');
+            document.getElementById('btn-' + tabId).classList.add('bg-[#151921]');
             
             // Re-trigger fade anim
             const el = document.getElementById(tabId);
             el.classList.remove('fade-in');
             void el.offsetWidth; 
             el.classList.add('fade-in');
-        }
-
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
         }
 
         function toggleSol(id) {
@@ -939,6 +866,9 @@ WHERE o.id IS NULL;`
             const block = document.getElementById(`code-block-${id}`);
             const q = codingQuestions.find(x => x.id === id);
             block.textContent = lang === 'java' ? q.codeJava : q.codePy;
+            
+            // Update syntax highlighting simulation (simple version)
+            // Ideally we'd use highlight.js but we want no external heavy deps
         }
 
         function filterCoding() {
@@ -950,7 +880,8 @@ WHERE o.id IS NULL;`
         function copyCode(elementId) {
             const text = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(text);
-            // Simple toast notification
+            
+            // Toast
             const btn = document.querySelector(`[onclick="copyCode('${elementId}')"]`);
             const originalHTML = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-check text-green-400"></i>';
