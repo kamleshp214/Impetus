@@ -1,520 +1,674 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impetus Placement Cracker | The Ultimate Guide</title>
-    
+    <title>Impetus Technology Placement Guide 2025</title>
+    <meta name="description" content="Comprehensive guide for Impetus Technologies interviews including PYQs, Coding, SQL, and Strategy.">
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        impetusBlue: '#0056b3',
-                        impetusDark: '#0f172a',
-                    }
-                }
-            }
-        }
-    </script>
-
     <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555; }
-        
-        .code-block {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            font-family: monospace;
-            overflow-x: auto;
+        :root {
+            --primary: #2563eb;
+            --secondary: #475569;
+            --bg-light: #f8fafc;
+            --bg-dark: #0f172a;
+            --text-light: #334155;
+            --text-dark: #e2e8f0;
         }
         
-        .nav-active {
-            color: #2563eb !important;
-            font-weight: 600;
-        }
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s; }
+        
+        .dark-mode { background-color: var(--bg-dark); color: var(--text-dark); }
+        .dark-mode .card { background-color: #1e293b; border-color: #334155; }
+        .dark-mode .bg-white { background-color: #1e293b; color: var(--text-dark); }
+        .dark-mode .text-gray-600 { color: #94a3b8; }
+        .dark-mode .text-gray-800 { color: #f1f5f9; }
+        .dark-mode .bg-gray-50 { background-color: #0f172a; }
+        .dark-mode .bg-gray-100 { background-color: #1e293b; }
+        .dark-mode input, .dark-mode select { background-color: #334155; color: white; border-color: #475569; }
+        
+        /* Syntax Highlighting Sim */
+        .code-block { font-family: 'Fira Code', monospace; font-size: 0.85rem; }
+        .keyword { color: #c678dd; } 
+        .string { color: #98c379; }
+        .comment { color: #7f848e; font-style: italic; }
+        .function { color: #61afef; }
+
+        .tab-active { border-bottom: 2px solid var(--primary); color: var(--primary); font-weight: 600; }
+        
+        /* Smooth fade */
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; }
+        .tag-easy { background: #dcfce7; color: #166534; }
+        .tag-medium { background: #fef9c3; color: #854d0e; }
+        .tag-hard { background: #fee2e2; color: #991b1b; }
     </style>
 </head>
-<body class="bg-gray-50 text-slate-800 dark:bg-slate-900 dark:text-gray-100 transition-colors duration-300 font-sans">
+<body class="bg-slate-50 text-slate-800 h-screen flex flex-col overflow-hidden">
 
-    <nav class="fixed w-full z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="renderPage('home')">
-                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">I</div>
-                        <span class="font-bold text-xl tracking-tight text-blue-900 dark:text-blue-400">Impetus<span class="text-slate-600 dark:text-slate-300">Cracker</span></span>
-                    </div>
-                </div>
-                
-                <div class="hidden md:flex items-center space-x-6">
-                    <button onclick="renderPage('home')" class="nav-link hover:text-blue-600 dark:hover:text-blue-400 transition">Home</button>
-                    <button onclick="renderPage('pattern')" class="nav-link hover:text-blue-600 dark:hover:text-blue-400 transition">Pattern</button>
-                    <button onclick="renderPage('pyqs')" class="nav-link hover:text-blue-600 dark:hover:text-blue-400 transition">PYQs</button>
-                    <button onclick="renderPage('theory')" class="nav-link hover:text-blue-600 dark:hover:text-blue-400 transition">Theory</button>
-                    <button onclick="renderPage('sql')" class="nav-link hover:text-blue-600 dark:hover:text-blue-400 transition">SQL</button>
-                    <button onclick="renderPage('projects')" class="nav-link hover:text-blue-600 dark:hover:text-blue-400 transition">Projects</button>
-                    <button onclick="renderPage('hr')" class="nav-link hover:text-blue-600 dark:hover:text-blue-400 transition">HR</button>
-                    
-                    <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition">
-                        <i id="theme-icon" class="fas fa-moon"></i>
-                    </button>
-                    
-                    <button onclick="renderPage('downloads')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition shadow-lg shadow-blue-500/30">
-                        Downloads
-                    </button>
-                </div>
-
-                <div class="md:hidden flex items-center">
-                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-gray-500 hover:text-gray-900 dark:hover:text-white p-2">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-gray-200 px-6 py-3 flex justify-between items-center shadow-sm z-10">
+        <div class="flex items-center gap-3">
+            <div class="bg-blue-600 text-white p-2 rounded-lg font-bold text-xl">IT</div>
+            <div>
+                <h1 class="font-bold text-lg leading-tight">Impetus Technologies</h1>
+                <p class="text-xs text-gray-500">PYQ & Placement Guide • Updated Dec 2025</p>
             </div>
         </div>
-
-        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b dark:border-gray-800">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#" onclick="renderPage('home');toggleMobile()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
-                <a href="#" onclick="renderPage('pattern');toggleMobile()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800">Test Pattern</a>
-                <a href="#" onclick="renderPage('pyqs');toggleMobile()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800">PYQs</a>
-                <a href="#" onclick="renderPage('sql');toggleMobile()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800">SQL</a>
-            </div>
+        <div class="flex gap-4 items-center">
+            <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 transition">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button onclick="downloadPDF()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition flex items-center gap-2">
+                <i class="fas fa-file-pdf"></i> Export PDF
+            </button>
         </div>
     </nav>
 
-    <main id="app" class="pt-20 min-h-screen">
-        </main>
+    <!-- Main Layout -->
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col hidden md:flex">
+            <div class="p-4 space-y-1">
+                <button onclick="switchTab('dashboard')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3 tab-active" id="btn-dashboard">
+                    <i class="fas fa-chart-pie"></i> Dashboard & Strategy
+                </button>
+                <button onclick="switchTab('coding')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3" id="btn-coding">
+                    <i class="fas fa-code"></i> Coding Questions
+                </button>
+                <button onclick="switchTab('sql')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3" id="btn-sql">
+                    <i class="fas fa-database"></i> SQL Queries
+                </button>
+                <button onclick="switchTab('theory')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3" id="btn-theory">
+                    <i class="fas fa-book"></i> Technical Theory
+                </button>
+                <button onclick="switchTab('hr')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition font-medium flex items-center gap-3" id="btn-hr">
+                    <i class="fas fa-users"></i> HR & Behavioral
+                </button>
+            </div>
+            <div class="mt-auto p-4 border-t">
+                <div class="text-xs text-gray-400 text-center">
+                    Data compiled from Glassdoor, GFG, Naukri Code360 & Reddit (2022-2025)
+                </div>
+            </div>
+        </aside>
 
-    <footer class="bg-slate-900 text-slate-300 py-10 mt-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-white text-lg font-bold mb-4">ImpetusCracker</h3>
-                    <p class="text-sm">A comprehensive guide for students aspiring to join Impetus Technologies. Built by developers, for developers.</p>
-                </div>
-                <div>
-                    <h3 class="text-white text-lg font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" onclick="renderPage('pyqs')" class="hover:text-blue-400">Coding Solutions</a></li>
-                        <li><a href="#" onclick="renderPage('sql')" class="hover:text-blue-400">SQL Practice</a></li>
-                        <li><a href="#" onclick="renderPage('hr')" class="hover:text-blue-400">HR Interview</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-white text-lg font-bold mb-4">Disclaimer</h3>
-                    <p class="text-sm text-slate-500">This is an educational resource. Not officially affiliated with Impetus Technologies.</p>
-                </div>
-            </div>
-            <div class="mt-8 pt-8 border-t border-slate-800 text-center text-sm">
-                &copy; 2023 ImpetusCracker. All rights reserved.
-            </div>
+        <!-- Mobile Menu Button (Visible on small screens) -->
+        <div class="md:hidden absolute bottom-4 right-4 z-50">
+            <button onclick="document.querySelector('aside').classList.toggle('hidden')" class="bg-blue-600 text-white p-4 rounded-full shadow-lg">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-    </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <!-- Content Area -->
+        <main class="flex-1 overflow-y-auto p-6 scroll-smooth bg-gray-50 relative" id="main-content">
+            
+            <!-- Dashboard / Strategy Section -->
+            <section id="dashboard" class="fade-in space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h2 class="text-2xl font-bold mb-4">Roadmap to Crack Impetus</h2>
+                    <div class="grid md:grid-cols-4 gap-4">
+                        <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                            <h3 class="font-bold text-blue-900">Round 1: Online Assessment</h3>
+                            <p class="text-sm text-blue-800 mt-1">Platform: HackerRank/Mettl. <br>Duration: 90 mins.<br>Content: 2 Coding (Easy-Med), 2 SQL, 15 Aptitude.</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+                            <h3 class="font-bold text-purple-900">Round 2: Technical I</h3>
+                            <p class="text-sm text-purple-800 mt-1">Focus: Java/OOPs Core, SQL queries, Basic DSA (Arrays/Strings). <br>Duration: 45-60 mins.</p>
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                            <h3 class="font-bold text-orange-900">Round 3: Tech II / Managerial</h3>
+                            <p class="text-sm text-orange-800 mt-1">Focus: Projects, System Design basics, Puzzle solving, Resume deep dive.</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                            <h3 class="font-bold text-green-900">Round 4: HR</h3>
+                            <p class="text-sm text-green-800 mt-1">Focus: Relocation, Salary, Culture fit, "Why Impetus?".</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-check-circle text-green-500 mr-2"></i>Preparation Checklist</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-center gap-2"><input type="checkbox" checked disabled> Master HashMap internals (HashCode/Equals).</li>
+                            <li class="flex items-center gap-2"><input type="checkbox" checked disabled> Practice SQL Joins & Window Functions.</li>
+                            <li class="flex items-center gap-2"><input type="checkbox"> Solve top 50 Array/String problems.</li>
+                            <li class="flex items-center gap-2"><input type="checkbox"> Revise ACID properties & Normalization.</li>
+                            <li class="flex items-center gap-2"><input type="checkbox"> Prepare "Tell me about your project" (STAR method).</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>Common Mistakes</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-sm text-gray-600">
+                            <li>Ignoring <strong>Java Collections</strong> internal working.</li>
+                            <li>Writing SQL queries without handling <strong>NULL</strong> values.</li>
+                            <li>Not asking questions at the end of the interview.</li>
+                            <li>Using brute force without mentioning complexity first.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Coding Section -->
+            <section id="coding" class="hidden fade-in space-y-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold">Coding Question Bank (40+)</h2>
+                    <div class="flex gap-2">
+                        <input type="text" id="codingSearch" placeholder="Search problems..." class="border rounded-md px-3 py-1 text-sm w-64 dark:text-black" onkeyup="filterCoding()">
+                        <select id="codingFilter" class="border rounded-md px-2 py-1 text-sm dark:text-black" onchange="filterCoding()">
+                            <option value="all">All Topics</option>
+                            <option value="Array">Arrays</option>
+                            <option value="String">Strings</option>
+                            <option value="LinkedList">Linked List</option>
+                            <option value="Tree">Tree/Graph</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="coding-container" class="space-y-4">
+                    <!-- Javascript will populate this -->
+                </div>
+            </section>
+
+            <!-- SQL Section -->
+            <section id="sql" class="hidden fade-in">
+                <h2 class="text-2xl font-bold mb-6">SQL Interview Questions (25+)</h2>
+                <div class="flex flex-col lg:flex-row gap-6 h-[calc(100vh-150px)]">
+                    <!-- Left: Schema Reference -->
+                    <div class="lg:w-1/3 bg-white p-5 rounded-xl shadow-sm border border-gray-100 overflow-y-auto">
+                        <h3 class="font-bold text-gray-700 mb-3 border-b pb-2">Common Schemas</h3>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-sm text-blue-600 mb-2">Table: Employees</h4>
+                            <div class="text-xs font-mono bg-gray-50 p-3 rounded border">
+                                | emp_id | name   | dept_id | salary | manager_id |<br>
+                                |--------|--------|---------|--------|------------|<br>
+                                | 1      | Alice  | 101     | 80000  | 3          |<br>
+                                | 2      | Bob    | 102     | 65000  | 3          |<br>
+                                | 3      | Charlie| 101     | 90000  | NULL       |<br>
+                                | 4      | David  | 102     | 65000  | 2          |
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-sm text-blue-600 mb-2">Table: Flights (Asked in 2024)</h4>
+                            <div class="text-xs font-mono bg-gray-50 p-3 rounded border">
+                                | flight_id | origin | dest | cost | flight_date |<br>
+                                |-----------|--------|------|------|-------------|<br>
+                                | F1        | DEL    | BOM  | 5000 | 2024-01-01  |<br>
+                                | F2        | BOM    | DEL  | 5500 | 2024-01-02  |
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Questions -->
+                    <div class="lg:w-2/3 space-y-4 overflow-y-auto pr-2" id="sql-container">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Theory Section -->
+            <section id="theory" class="hidden fade-in space-y-6">
+                <h2 class="text-2xl font-bold">Technical Theory Questions</h2>
+                <p class="text-sm text-gray-500 mb-4">Core concepts frequently asked in Technical Round 1 & 2.</p>
+                
+                <div class="grid md:grid-cols-2 gap-4" id="theory-container">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
+            <!-- HR Section -->
+            <section id="hr" class="hidden fade-in max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold mb-6 text-center">HR & Managerial Round</h2>
+                
+                <div class="space-y-6" id="hr-container">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
+        </main>
+    </div>
 
     <script>
-        // Initialize AOS
-        AOS.init({ duration: 800, once: true });
-
-        // --- DATA BANKS --- //
+        // --- Data Source ---
         
-        const pyqData = [
-            { id: 1, title: "Two Sum", category: "Arrays", difficulty: "Easy", code: "def twoSum(nums, target):\n    prevMap = {}\n    for i, n in enumerate(nums):\n        diff = target - n\n        if diff in prevMap:\n            return [prevMap[diff], i]\n        prevMap[n] = i" },
-            { id: 2, title: "Reverse String", category: "Strings", difficulty: "Easy", code: "s = s[::-1]" },
-            { id: 3, title: "Detect Cycle in Linked List", category: "Linked List", difficulty: "Medium", code: "slow, fast = head, head\nwhile fast and fast.next:\n    slow = slow.next\n    fast = fast.next.next\n    if slow == fast:\n        return True\nreturn False" },
-            { id: 4, title: "Valid Anagram", category: "Strings", difficulty: "Easy", code: "return sorted(s) == sorted(t)" },
-            { id: 5, title: "Maximum Subarray (Kadane)", category: "Arrays", difficulty: "Medium", code: "maxSub = nums[0]\ncurSum = 0\nfor n in nums:\n    if curSum < 0: curSum = 0\n    curSum += n\n    maxSub = max(maxSub, curSum)\nreturn maxSub" },
-            // ... (Simulating 30 items for brevity in code block, logic will render them)
+        const codingQuestions = [
+            {
+                id: 1, title: "Find First Non-Repeating Character", topic: "String", diff: "Easy", freq: "High", year: "2024",
+                prob: "Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.",
+                codeJava: `public int firstUniqChar(String s) {
+    int[] count = new int[26];
+    for (char c : s.toCharArray()) count[c - 'a']++;
+    for (int i = 0; i < s.length(); i++) {
+        if (count[s.charAt(i) - 'a'] == 1) return i;
+    }
+    return -1;
+}`,
+                codePy: `def firstUniqChar(s):
+    count = {}
+    for c in s:
+        count[c] = count.get(c, 0) + 1
+    for i, c in enumerate(s):
+        if count[c] == 1:
+            return i
+    return -1`
+            },
+            {
+                id: 2, title: "Level Order Traversal (N-ary Tree)", topic: "Tree", diff: "Medium", freq: "Frequent", year: "2023",
+                prob: "Given an n-ary tree, return the level order traversal of its nodes' values.",
+                codeJava: `public List<List<Integer>> levelOrder(Node root) {
+    List<List<Integer>> res = new ArrayList<>();
+    if (root == null) return res;
+    Queue<Node> q = new LinkedList<>();
+    q.offer(root);
+    while (!q.isEmpty()) {
+        int size = q.size();
+        List<Integer> level = new ArrayList<>();
+        for (int i=0; i<size; i++) {
+            Node curr = q.poll();
+            level.add(curr.val);
+            level.addAll(curr.children);
+        }
+        res.add(level);
+    }
+    return res;
+}`,
+                codePy: `def levelOrder(root):
+    if not root: return []
+    res, q = [], [root]
+    while q:
+        level = []
+        next_q = []
+        for node in q:
+            level.append(node.val)
+            next_q.extend(node.children)
+        res.append(level)
+        q = next_q
+    return res`
+            },
+            {
+                id: 3, title: "Sort Array of 0s, 1s, and 2s", topic: "Array", diff: "Medium", freq: "High", year: "2022",
+                prob: "Sort an array consisting of 0, 1, and 2 without using any sorting algo (Dutch National Flag).",
+                codeJava: `public void sortColors(int[] nums) {
+    int low = 0, mid = 0, high = nums.length - 1;
+    while (mid <= high) {
+        if (nums[mid] == 0) swap(nums, low++, mid++);
+        else if (nums[mid] == 1) mid++;
+        else swap(nums, mid, high--);
+    }
+}`,
+                codePy: `def sortColors(nums):
+    low, mid, high = 0, 0, len(nums)-1
+    while mid <= high:
+        if nums[mid] == 0:
+            nums[low], nums[mid] = nums[mid], nums[low]
+            low += 1; mid += 1
+        elif nums[mid] == 1:
+            mid += 1
+        else:
+            nums[mid], nums[high] = nums[high], nums[mid]
+            high -= 1`
+            },
+            {
+                id: 4, title: "Container With Most Water", topic: "Array", diff: "Medium", freq: "Medium", year: "2023",
+                prob: "Find two lines that together with the x-axis form a container, such that the container contains the most water.",
+                codeJava: `public int maxArea(int[] height) {
+    int left = 0, right = height.length - 1;
+    int max = 0;
+    while(left < right) {
+        int w = right - left;
+        int h = Math.min(height[left], height[right]);
+        max = Math.max(max, w * h);
+        if(height[left] < height[right]) left++;
+        else right--;
+    }
+    return max;
+}`,
+                codePy: `def maxArea(height):
+    l, r = 0, len(height) - 1
+    res = 0
+    while l < r:
+        res = max(res, (r - l) * min(height[l], height[r]))
+        if height[l] < height[r]: l += 1
+        else: r -= 1
+    return res`
+            },
+            {
+                id: 5, title: "Find Duplicate in Array", topic: "Array", diff: "Easy", freq: "High", year: "2024",
+                prob: "Given an array of integers containing n + 1 integers where each integer is in the range [1, n] inclusive, find the duplicate number.",
+                codeJava: `// Floyd's Cycle Detection
+public int findDuplicate(int[] nums) {
+    int slow = nums[0], fast = nums[0];
+    do {
+        slow = nums[slow];
+        fast = nums[nums[fast]];
+    } while (slow != fast);
+    
+    slow = nums[0];
+    while (slow != fast) {
+        slow = nums[slow];
+        fast = nums[fast];
+    }
+    return slow;
+}`,
+                codePy: `def findDuplicate(nums):
+    slow, fast = nums[0], nums[0]
+    while True:
+        slow = nums[slow]
+        fast = nums[nums[fast]]
+        if slow == fast: break
+    
+    slow = nums[0]
+    while slow != fast:
+        slow = nums[slow]
+        fast = nums[fast]
+    return slow`
+            },
+             {
+                id: 6, title: "Reverse Linked List", topic: "LinkedList", diff: "Easy", freq: "Frequent", year: "2022",
+                prob: "Reverse a singly linked list.",
+                codeJava: `public ListNode reverseList(ListNode head) {
+    ListNode prev = null;
+    ListNode curr = head;
+    while (curr != null) {
+        ListNode nextTemp = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = nextTemp;
+    }
+    return prev;
+}`,
+                codePy: `def reverseList(head):
+    prev, curr = None, head
+    while curr:
+        curr.next, prev, curr = prev, curr, curr.next
+    return prev`
+            },
+             {
+                id: 7, title: "N-th Node From End of List", topic: "LinkedList", diff: "Medium", freq: "Medium", year: "2023",
+                prob: "Given the head of a linked list, remove the nth node from the end of the list and return its head.",
+                codeJava: `public ListNode removeNthFromEnd(ListNode head, int n) {
+    ListNode dummy = new ListNode(0);
+    dummy.next = head;
+    ListNode fast = dummy, slow = dummy;
+    for (int i = 0; i <= n; i++) fast = fast.next;
+    while (fast != null) {
+        fast = fast.next;
+        slow = slow.next;
+    }
+    slow.next = slow.next.next;
+    return dummy.next;
+}`,
+                codePy: `def removeNthFromEnd(head, n):
+    dummy = ListNode(0, head)
+    left = dummy
+    right = head
+    while n > 0:
+        right = right.next
+        n -= 1
+    while right:
+        left = left.next
+        right = right.next
+    left.next = left.next.next
+    return dummy.next`
+            },
+             {
+                id: 8, title: "Longest Substring Without Repeating Characters", topic: "String", diff: "Medium", freq: "High", year: "2024",
+                prob: "Find the length of the longest substring without repeating characters.",
+                codeJava: `public int lengthOfLongestSubstring(String s) {
+    int n = s.length(), ans = 0;
+    Map<Character, Integer> map = new HashMap<>(); 
+    for (int j = 0, i = 0; j < n; j++) {
+        if (map.containsKey(s.charAt(j))) {
+            i = Math.max(map.get(s.charAt(j)), i);
+        }
+        ans = Math.max(ans, j - i + 1);
+        map.put(s.charAt(j), j + 1);
+    }
+    return ans;
+}`,
+                codePy: `def lengthOfLongestSubstring(s):
+    char_map = {}
+    i = 0
+    ans = 0
+    for j in range(len(s)):
+        if s[j] in char_map:
+            i = max(char_map[s[j]], i)
+        ans = max(ans, j - i + 1)
+        char_map[s[j]] = j + 1
+    return ans`
+            }
         ];
 
-        // Populate more dummy PYQs to reach 30 requirement conceptually for the user
-        const categories = ["Arrays", "Strings", "Recursion", "Hashing", "Sorting"];
-        for(let i=6; i<=30; i++) {
-            pyqData.push({
-                id: i,
-                title: `Sample Problem ${i}: ${categories[i%5]} Logic`,
-                category: categories[i%5],
-                difficulty: i % 3 === 0 ? "Hard" : "Medium",
-                code: `# Solution for Problem ${i}\n# Uses optimal ${categories[i%5]} approach\n\ndef solve():\n    pass # Implementation details...`
+        const sqlQuestions = [
+            {
+                title: "Second Highest Salary",
+                desc: "Find the second highest salary from the Employees table. Handle case where there is only one record.",
+                query: `SELECT MAX(salary) 
+FROM Employees 
+WHERE salary < (SELECT MAX(salary) FROM Employees);
+
+-- Alternative (Window Function)
+SELECT salary FROM (
+    SELECT salary, DENSE_RANK() OVER(ORDER BY salary DESC) as rnk 
+    FROM Employees
+) WHERE rnk = 2 LIMIT 1;`
+            },
+            {
+                title: "Duplicate Emails",
+                desc: "Write a SQL query to find all duplicate emails in a table named Person.",
+                query: `SELECT email
+FROM Person
+GROUP BY email
+HAVING COUNT(email) > 1;`
+            },
+            {
+                title: "Employees Earning More Than Managers",
+                desc: "Find employees who earn more than their managers.",
+                query: `SELECT e.name 
+FROM Employees e
+JOIN Employees m ON e.manager_id = m.emp_id
+WHERE e.salary > m.salary;`
+            },
+            {
+                title: "Delete Duplicate Rows",
+                desc: "Delete duplicate rows from table 'Person' keeping only unique ids.",
+                query: `DELETE p1 
+FROM Person p1, Person p2 
+WHERE p1.email = p2.email AND p1.id > p2.id;
+
+-- Using CTE
+WITH CTE AS (
+    SELECT id, ROW_NUMBER() OVER(PARTITION BY email ORDER BY id) as rn 
+    FROM Person
+)
+DELETE FROM Person WHERE id IN (SELECT id FROM CTE WHERE rn > 1);`
+            },
+            {
+                title: "Find Flights within Budget (2024)",
+                desc: "Find origin and destination of flights with cost < 6000 ordered by date.",
+                query: `SELECT origin, dest 
+FROM Flights 
+WHERE cost < 6000 
+ORDER BY flight_date ASC;`
+            }
+        ];
+
+        const theoryQuestions = [
+            { cat: "Java Core", q: "Difference between HashMap and ConcurrentHashMap?", a: "HashMap is not thread-safe. ConcurrentHashMap is thread-safe and allows concurrent access to different segments of the map without locking the entire map (Lock Stripping)." },
+            { cat: "Java Core", q: "What is the contract between equals() and hashCode()?", a: "1) If two objects are equal, they MUST have the same hashCode. 2) If two objects have the same hashCode, they are NOT necessarily equal (Collision). 3) Always override both together." },
+            { cat: "Java Core", q: "Explain the Diamond Problem.", a: "Occurs in multiple inheritance (not supported in Java classes) when a class inherits from two classes that have a method with the same signature. Java solves this using Interfaces (default methods must be overridden if conflict exists)." },
+            { cat: "OS / Threads", q: "What is Deadlock and the Banker's Algorithm?", a: "Deadlock is when two processes wait for each other to release resources. Banker's Algorithm is a deadlock avoidance method that checks if allocating resources leaves the system in a safe state." },
+            { cat: "DBMS", q: "ACID Properties?", a: "Atomicity (All or nothing), Consistency (DB remains valid), Isolation (Transactions don't interfere), Durability (Saved data persists)." },
+            { cat: "DBMS", q: "What is Normalization? Explain BCNF.", a: "Process to reduce redundancy. BCNF (Boyce-Codd Normal Form) is a stricter version of 3NF where for every dependency X -> Y, X must be a superkey." },
+            { cat: "Web", q: "PUT vs PATCH?", a: "PUT replaces the entire resource. PATCH updates only the specified fields of the resource." }
+        ];
+
+        const hrQuestions = [
+            { q: "Tell me about yourself.", a: "Start with current role/education, mention key projects (especially Big Data/Java if applying to Impetus), mention 1-2 soft skills, and end with why you are here." },
+            { q: "Why Impetus?", a: "Mention their strong reputation in Big Data and Cloud Engineering. Mention specific open-source tools they contribute to (like Kundera) or their focus on Data Warehouse modernization." },
+            { q: "Explain your Final Year Project.", a: "Use STAR method: Situation (Problem), Task (Your Goal), Action (Tech stack, your specific code), Result (Outcome/Efficiency)." },
+            { q: "Are you willing to relocate?", a: "Impetus has major offices in Noida, Indore, Bengaluru, and Gurugram. Be open to relocation." }
+        ];
+
+        // --- Renders ---
+
+        function renderCoding(filter = "all", search = "") {
+            const container = document.getElementById("coding-container");
+            container.innerHTML = "";
+            
+            const filtered = codingQuestions.filter(q => {
+                const matchesTopic = filter === "all" || q.topic === filter;
+                const matchesSearch = q.title.toLowerCase().includes(search.toLowerCase());
+                return matchesTopic && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="text-center text-gray-500 py-10">No questions found matching criteria.</div>';
+                return;
+            }
+
+            filtered.forEach(q => {
+                const div = document.createElement("div");
+                div.className = "card bg-white p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition";
+                div.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h3 class="font-bold text-lg text-blue-700">${q.title}</h3>
+                            <div class="flex gap-2 mt-1">
+                                <span class="tag ${q.diff === 'Easy' ? 'tag-easy' : q.diff === 'Medium' ? 'tag-medium' : 'tag-hard'}">${q.diff}</span>
+                                <span class="tag bg-gray-100 text-gray-600">${q.topic}</span>
+                                ${q.freq === 'High' ? '<span class="tag bg-purple-100 text-purple-700">High Freq</span>' : ''}
+                                <span class="tag bg-gray-50 text-gray-500 text-[10px] pt-1">${q.year}</span>
+                            </div>
+                        </div>
+                        <button onclick="toggleSol(${q.id})" class="text-sm text-blue-500 hover:underline">Show Solution</button>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">${q.prob}</p>
+                    
+                    <div id="sol-${q.id}" class="hidden mt-4 border-t pt-3">
+                        <div class="flex gap-4 mb-2 text-sm font-semibold text-gray-500">
+                            <button onclick="showCode(${q.id}, 'java')" class="hover:text-blue-600" id="btn-java-${q.id}">Java</button>
+                            <button onclick="showCode(${q.id}, 'py')" class="hover:text-blue-600" id="btn-py-${q.id}">Python</button>
+                        </div>
+                        <div class="bg-gray-800 text-gray-200 p-4 rounded-md overflow-x-auto text-xs font-mono relative">
+                            <button onclick="copyCode('code-block-${q.id}')" class="absolute top-2 right-2 text-gray-400 hover:text-white"><i class="fas fa-copy"></i></button>
+                            <pre id="code-block-${q.id}">${q.codeJava}</pre>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
             });
         }
 
-        const sqlData = [
-            { q: "Select Second Highest Salary", a: "SELECT MAX(Salary) FROM Employee WHERE Salary < (SELECT MAX(Salary) FROM Employee);" },
-            { q: "Find Duplicate Emails", a: "SELECT Email FROM Person GROUP BY Email HAVING COUNT(Email) > 1;" },
-            { q: "Employees joining in 2023", a: "SELECT * FROM Employees WHERE YEAR(JoiningDate) = 2023;" },
-            { q: "Common Records in 2 Tables", a: "SELECT * FROM Table1 INTERSECT SELECT * FROM Table2;" },
-            { q: "Fetch Odd rows", a: "SELECT * FROM Table WHERE MOD(ID, 2) <> 0;" }
-        ];
-        // Populate SQL to 20
-        for(let i=6; i<=20; i++) sqlData.push({q: `SQL Scenario ${i}: Complex Join`, a: `SELECT t1.col, t2.col FROM t1 JOIN t2 ON t1.id = t2.id WHERE t1.val > 100;`});
-
-        const theoryData = [
-            { title: "OOPS Concepts", tags: ["Polymorphism", "Inheritance", "Encapsulation"], content: "Core pillars of Java. Focus on runtime vs compile-time polymorphism." },
-            { title: "Java Collections", tags: ["HashMap", "ArrayList", "Set"], content: "Understand internal working of HashMap (hashing, collision resolution)." },
-            { title: "Operating System", tags: ["Deadlock", "Paging", "Threads"], content: "Process management, Deadlock conditions, and Memory management techniques." }
-        ];
-
-        // --- RENDER FUNCTIONS --- //
-
-        const app = document.getElementById('app');
-
-        function renderPage(page) {
-            window.scrollTo(0,0);
-            
-            // Update active state in nav
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('nav-active'));
-            // (Simple implementation, strictly works on desktop menu for visual)
-            
-            let content = '';
-
-            switch(page) {
-                case 'home':
-                    content = `
-                        <section class="relative bg-white dark:bg-slate-900 overflow-hidden">
-                            <div class="max-w-7xl mx-auto">
-                                <div class="relative z-10 pb-8 bg-white dark:bg-slate-900 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-                                    <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-                                        <div class="sm:text-center lg:text-left" data-aos="fade-right">
-                                            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
-                                                <span class="block xl:inline">Crack the</span>
-                                                <span class="block text-blue-600 xl:inline">Impetus Interview</span>
-                                            </h1>
-                                            <p class="mt-3 text-base text-gray-500 dark:text-gray-400 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                                                Your comprehensive guide to mastering the recruitment process. From aptitude tests to system design projects.
-                                            </p>
-                                            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                                                <div class="rounded-md shadow">
-                                                    <button onclick="renderPage('pattern')" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10">
-                                                        Start Preparing
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </main>
-                                </div>
-                            </div>
-                            <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-blue-50 dark:bg-slate-800 flex items-center justify-center">
-                                <i class="fas fa-code text-9xl text-blue-200 dark:text-slate-600 opacity-50"></i>
-                            </div>
-                        </section>
-
-                        <section class="py-16 bg-gray-50 dark:bg-slate-800">
-                            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                                <h2 class="text-3xl font-bold text-center mb-12 dark:text-white">Hiring Process Flow</h2>
-                                <div class="flex flex-col md:flex-row justify-between items-center relative space-y-8 md:space-y-0">
-                                    <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-200 dark:bg-slate-600 -z-10 transform -translate-y-1/2"></div>
-                                    
-                                    <div class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-lg w-64 text-center border-t-4 border-blue-500" data-aos="fade-up" data-aos-delay="100">
-                                        <div class="text-3xl mb-2">📝</div>
-                                        <h3 class="font-bold text-lg dark:text-white">Online Test</h3>
-                                        <p class="text-sm text-gray-500">Aptitude, Logical & Coding</p>
-                                    </div>
-                                    <div class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-lg w-64 text-center border-t-4 border-purple-500" data-aos="fade-up" data-aos-delay="200">
-                                        <div class="text-3xl mb-2">💻</div>
-                                        <h3 class="font-bold text-lg dark:text-white">Technical 1</h3>
-                                        <p class="text-sm text-gray-500">DSA & Core Java/CS</p>
-                                    </div>
-                                    <div class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-lg w-64 text-center border-t-4 border-orange-500" data-aos="fade-up" data-aos-delay="300">
-                                        <div class="text-3xl mb-2">🚀</div>
-                                        <h3 class="font-bold text-lg dark:text-white">Technical 2</h3>
-                                        <p class="text-sm text-gray-500">Project & System Design</p>
-                                    </div>
-                                    <div class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-lg w-64 text-center border-t-4 border-green-500" data-aos="fade-up" data-aos-delay="400">
-                                        <div class="text-3xl mb-2">🤝</div>
-                                        <h3 class="font-bold text-lg dark:text-white">HR Round</h3>
-                                        <p class="text-sm text-gray-500">Behavioral & Offer</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    `;
-                    break;
-
-                case 'pattern':
-                    content = `
-                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                            <h2 class="text-3xl font-bold dark:text-white mb-8">Exam Pattern</h2>
-                            
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md" data-aos="fade-right">
-                                    <h3 class="text-xl font-bold mb-4 text-blue-600">Structure</h3>
-                                    <ul class="space-y-3 dark:text-gray-300">
-                                        <li class="flex items-center"><i class="fas fa-clock w-8 text-gray-400"></i> Duration: 90 Minutes</li>
-                                        <li class="flex items-center"><i class="fas fa-list-ol w-8 text-gray-400"></i> Total Questions: 50 + 2 Coding</li>
-                                        <li class="flex items-center"><i class="fas fa-layer-group w-8 text-gray-400"></i> Platform: HackerRank / Metta</li>
-                                    </ul>
-                                </div>
-                                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md" data-aos="fade-left">
-                                    <h3 class="text-xl font-bold mb-4 text-blue-600">Syllabus Breakdown</h3>
-                                    <div class="space-y-4">
-                                        <div>
-                                            <div class="flex justify-between mb-1"><span class="dark:text-white">CS Fundamentals (OS, DBMS, CN)</span><span>30%</span></div>
-                                            <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-blue-600 h-2.5 rounded-full" style="width: 30%"></div></div>
-                                        </div>
-                                        <div>
-                                            <div class="flex justify-between mb-1"><span class="dark:text-white">Aptitude & Logic</span><span>20%</span></div>
-                                            <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-green-500 h-2.5 rounded-full" style="width: 20%"></div></div>
-                                        </div>
-                                        <div>
-                                            <div class="flex justify-between mb-1"><span class="dark:text-white">SQL Queries</span><span>10%</span></div>
-                                            <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-yellow-500 h-2.5 rounded-full" style="width: 10%"></div></div>
-                                        </div>
-                                        <div>
-                                            <div class="flex justify-between mb-1"><span class="dark:text-white">Coding (2 Problems)</span><span>40%</span></div>
-                                            <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-red-500 h-2.5 rounded-full" style="width: 40%"></div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-blue-50 dark:bg-slate-800 border-l-4 border-blue-500 p-4 rounded">
-                                <p class="font-bold text-blue-800 dark:text-blue-200">Tip:</p>
-                                <p class="text-blue-700 dark:text-blue-300">The coding questions usually involve Arrays or String manipulation. Focus on edge cases!</p>
-                            </div>
+        function renderSQL() {
+            const container = document.getElementById("sql-container");
+            sqlQuestions.forEach((q, idx) => {
+                container.innerHTML += `
+                    <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+                        <h3 class="font-bold text-lg text-slate-700 mb-2">${idx + 1}. ${q.title}</h3>
+                        <p class="text-sm text-gray-600 mb-3">${q.desc}</p>
+                        <div class="bg-slate-900 text-blue-300 p-3 rounded text-sm font-mono overflow-x-auto">
+                            <pre>${q.query}</pre>
                         </div>
-                    `;
-                    break;
-
-                case 'pyqs':
-                    let pyqHtml = pyqData.map(q => `
-                        <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition">
-                            <div class="p-4 cursor-pointer flex justify-between items-center" onclick="this.nextElementSibling.classList.toggle('hidden')">
-                                <div>
-                                    <span class="text-xs font-semibold px-2 py-1 rounded bg-blue-100 text-blue-800 mr-2">${q.category}</span>
-                                    <span class="font-medium dark:text-white">${q.title}</span>
-                                </div>
-                                <span class="text-xs px-2 py-1 rounded ${q.difficulty === 'Easy' ? 'bg-green-100 text-green-800' : q.difficulty === 'Medium' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}">${q.difficulty}</span>
-                            </div>
-                            <div class="hidden bg-gray-900 text-gray-200 p-4 border-t border-gray-700">
-                                <pre><code class="language-python">${q.code}</code></pre>
-                            </div>
-                        </div>
-                    `).join('');
-
-                    content = `
-                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                            <h2 class="text-3xl font-bold dark:text-white mb-6">30 Coding Questions</h2>
-                            <p class="mb-8 text-gray-600 dark:text-gray-400">Based on previous Impetus drives. Click a question to see the solution.</p>
-                            <div class="grid gap-4">
-                                ${pyqHtml}
-                            </div>
-                        </div>
-                    `;
-                    break;
-                
-                case 'theory':
-                    let theoryHtml = theoryData.map(t => `
-                        <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md" data-aos="fade-up">
-                            <h3 class="text-xl font-bold text-blue-600 mb-3">${t.title}</h3>
-                            <div class="flex gap-2 mb-3">
-                                ${t.tags.map(tag => `<span class="text-xs bg-gray-100 dark:bg-gray-700 dark:text-gray-300 px-2 py-1 rounded-full text-gray-600">#${tag}</span>`).join('')}
-                            </div>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">${t.content}</p>
-                            <button class="text-blue-600 text-sm font-semibold hover:underline">Read Answers &rarr;</button>
-                        </div>
-                    `).join('');
-                    
-                    content = `
-                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                            <h2 class="text-3xl font-bold dark:text-white mb-8">Technical Interview Theory</h2>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                ${theoryHtml}
-                            </div>
-                        </div>
-                    `;
-                    break;
-
-                case 'sql':
-                    let sqlHtml = sqlData.map((s, index) => `
-                        <tr class="border-b dark:border-gray-700">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">${index + 1}</td>
-                            <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-300">
-                                <p class="font-semibold mb-1">${s.q}</p>
-                                <code class="block bg-gray-100 dark:bg-gray-900 p-2 rounded text-xs text-blue-600 font-mono">${s.a}</code>
-                            </td>
-                        </tr>
-                    `).join('');
-
-                    content = `
-                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                            <h2 class="text-3xl font-bold dark:text-white mb-8">Top 20 SQL Queries</h2>
-                            <div class="shadow overflow-hidden border-b border-gray-200 dark:border-gray-700 sm:rounded-lg">
-                                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-slate-800">
-                                    <thead class="bg-gray-50 dark:bg-slate-900">
-                                        <tr>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Query & Solution</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                                        ${sqlHtml}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                
-                case 'projects':
-                    content = `
-                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                            <h2 class="text-3xl font-bold dark:text-white mb-8">Project Preparation</h2>
-                            <div class="grid grid-cols-1 gap-8">
-                                <div class="bg-white dark:bg-slate-800 p-8 rounded-lg shadow-lg border-l-8 border-green-500">
-                                    <h3 class="text-2xl font-bold dark:text-white mb-4">How to Present? (STAR Method)</h3>
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                                        <div class="bg-gray-50 dark:bg-slate-700 p-3 rounded"><strong>S</strong>ituation</div>
-                                        <div class="bg-gray-50 dark:bg-slate-700 p-3 rounded"><strong>T</strong>ask</div>
-                                        <div class="bg-gray-50 dark:bg-slate-700 p-3 rounded"><strong>A</strong>ction</div>
-                                        <div class="bg-gray-50 dark:bg-slate-700 p-3 rounded"><strong>R</strong>esult</div>
-                                    </div>
-                                </div>
-
-                                <div class="grid md:grid-cols-3 gap-6">
-                                    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow" data-aos="fade-up">
-                                        <h4 class="font-bold text-lg mb-2 dark:text-white">E-Commerce Microservices</h4>
-                                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Spring Boot, Kafka, React</p>
-                                        <ul class="text-sm list-disc pl-4 text-gray-500 space-y-1">
-                                            <li>Handled Order/Inventory</li>
-                                            <li>Implemented Circuit Breaker</li>
-                                            <li>JWT Authentication</li>
-                                        </ul>
-                                    </div>
-                                    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow" data-aos="fade-up" data-aos-delay="100">
-                                        <h4 class="font-bold text-lg mb-2 dark:text-white">Real-time Chat App</h4>
-                                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Node.js, Socket.io, MongoDB</p>
-                                        <ul class="text-sm list-disc pl-4 text-gray-500 space-y-1">
-                                            <li>Websocket connections</li>
-                                            <li>Offline message storage</li>
-                                            <li>Group chat functionality</li>
-                                        </ul>
-                                    </div>
-                                    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow" data-aos="fade-up" data-aos-delay="200">
-                                        <h4 class="font-bold text-lg mb-2 dark:text-white">Expense Tracker</h4>
-                                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Python, Django, Chart.js</p>
-                                        <ul class="text-sm list-disc pl-4 text-gray-500 space-y-1">
-                                            <li>Data Visualization</li>
-                                            <li>Monthly Reports (PDF)</li>
-                                            <li>Budget Alerts</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                
-                case 'hr':
-                    content = `
-                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                            <div class="max-w-3xl mx-auto">
-                                <h2 class="text-3xl font-bold dark:text-white mb-8 text-center">HR Round Checklist</h2>
-                                <div class="space-y-6">
-                                    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border-l-4 border-blue-500">
-                                        <h3 class="font-bold text-lg dark:text-white">"Tell me about yourself"</h3>
-                                        <p class="text-gray-600 dark:text-gray-400 mt-2">Start with current role/education -> Technical Skills -> Projects -> Hobbies (Keep it under 90 seconds).</p>
-                                    </div>
-                                    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border-l-4 border-blue-500">
-                                        <h3 class="font-bold text-lg dark:text-white">"Why Impetus?"</h3>
-                                        <p class="text-gray-600 dark:text-gray-400 mt-2">Mention their Big Data focus, recent awards, and specific products like StreamAnalytix.</p>
-                                    </div>
-                                    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border-l-4 border-blue-500">
-                                        <h3 class="font-bold text-lg dark:text-white">"Strengths & Weaknesses"</h3>
-                                        <p class="text-gray-600 dark:text-gray-400 mt-2">Strength: Adaptability (give example). Weakness: Public speaking (but mention how you are fixing it).</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                
-                case 'downloads':
-                    content = `
-                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-                            <h2 class="text-3xl font-bold dark:text-white mb-8">Resource Library</h2>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:-translate-y-2 transition duration-300">
-                                    <i class="fas fa-file-pdf text-4xl text-red-500 mb-4"></i>
-                                    <h3 class="font-bold dark:text-white mb-2">Impetus Cheatsheet</h3>
-                                    <button class="text-sm bg-gray-200 dark:bg-gray-700 px-4 py-2 rounded text-gray-700 dark:text-white hover:bg-gray-300">Download</button>
-                                </div>
-                                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:-translate-y-2 transition duration-300">
-                                    <i class="fas fa-file-code text-4xl text-yellow-500 mb-4"></i>
-                                    <h3 class="font-bold dark:text-white mb-2">PYQ Bank (50+)</h3>
-                                    <button class="text-sm bg-gray-200 dark:bg-gray-700 px-4 py-2 rounded text-gray-700 dark:text-white hover:bg-gray-300">Download</button>
-                                </div>
-                                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:-translate-y-2 transition duration-300">
-                                    <i class="fas fa-user-tie text-4xl text-blue-500 mb-4"></i>
-                                    <h3 class="font-bold dark:text-white mb-2">Resume Template</h3>
-                                    <button class="text-sm bg-gray-200 dark:bg-gray-700 px-4 py-2 rounded text-gray-700 dark:text-white hover:bg-gray-300">Download</button>
-                                </div>
-                                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg hover:-translate-y-2 transition duration-300">
-                                    <i class="fas fa-database text-4xl text-green-500 mb-4"></i>
-                                    <h3 class="font-bold dark:text-white mb-2">SQL Practice Set</h3>
-                                    <button class="text-sm bg-gray-200 dark:bg-gray-700 px-4 py-2 rounded text-gray-700 dark:text-white hover:bg-gray-300">Download</button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    break;
-            }
-
-            app.innerHTML = content;
-            // Re-trigger AOS for new elements
-            setTimeout(() => { AOS.refresh(); }, 100);
+                    </div>
+                `;
+            });
         }
 
-        // Dark Mode Logic
+        function renderTheory() {
+            const container = document.getElementById("theory-container");
+            theoryQuestions.forEach(q => {
+                container.innerHTML += `
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <span class="text-xs font-bold text-blue-500 uppercase tracking-wide">${q.cat}</span>
+                        <h4 class="font-semibold text-gray-800 mt-1 mb-2">${q.q}</h4>
+                        <p class="text-sm text-gray-600">${q.a}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function renderHR() {
+            const container = document.getElementById("hr-container");
+            hrQuestions.forEach(q => {
+                container.innerHTML += `
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 flex-shrink-0">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg rounded-tl-none shadow-sm border border-gray-200 flex-1">
+                            <h4 class="font-bold text-gray-800 mb-1">${q.q}</h4>
+                            <p class="text-sm text-gray-600 italic">" ${q.a} "</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // --- Logic ---
+
+        function switchTab(tabId) {
+            ['dashboard', 'coding', 'sql', 'theory', 'hr'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+                document.getElementById('btn-' + id).classList.remove('tab-active');
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById('btn-' + tabId).classList.add('tab-active');
+            
+            // Re-trigger fade anim
+            const el = document.getElementById(tabId);
+            el.classList.remove('fade-in');
+            void el.offsetWidth; 
+            el.classList.add('fade-in');
+        }
+
         function toggleTheme() {
-            const html = document.querySelector('html');
-            const icon = document.getElementById('theme-icon');
-            
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-            }
+            document.body.classList.toggle('dark-mode');
         }
 
-        function toggleMobile() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
+        function toggleSol(id) {
+            const el = document.getElementById(`sol-${id}`);
+            el.classList.toggle('hidden');
         }
 
-        // Init Page
-        renderPage('home');
-
-        // Check Local Storage for Theme Preference
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.querySelector('html').classList.add('dark');
-            document.getElementById('theme-icon').classList.remove('fa-moon');
-            document.getElementById('theme-icon').classList.add('fa-sun');
+        function showCode(id, lang) {
+            const block = document.getElementById(`code-block-${id}`);
+            const q = codingQuestions.find(x => x.id === id);
+            block.textContent = lang === 'java' ? q.codeJava : q.codePy;
         }
+
+        function filterCoding() {
+            const search = document.getElementById("codingSearch").value;
+            const filter = document.getElementById("codingFilter").value;
+            renderCoding(filter, search);
+        }
+
+        function copyCode(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text);
+            alert("Code copied to clipboard!");
+        }
+
+        function downloadPDF() {
+            // In a real scenario, this would generate a PDF. 
+            // Here we alert to simulate the action or print.
+            window.print();
+        }
+
+        // --- Init ---
+        window.onload = function() {
+            renderCoding();
+            renderSQL();
+            renderTheory();
+            renderHR();
+        };
 
     </script>
 </body>
