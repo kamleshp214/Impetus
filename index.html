@@ -291,6 +291,8 @@
                             <option value="LinkedList">Linked List</option>
                             <option value="Tree">Tree/Graph</option>
                             <option value="DP">Dynamic Prog</option>
+                            <option value="Graph">Graph</option>
+                            <option value="Backtracking">Backtracking</option>
                         </select>
                     </div>
                 </div>
@@ -942,6 +944,82 @@
                 space: "O(1)",
                 codeJava: "class Singleton {\n    private static volatile Singleton inst;\n    private Singleton(){}\n    public static Singleton getInstance() {\n        if(inst==null) {\n            synchronized(Singleton.class) {\n                if(inst==null) inst=new Singleton();\n            }\n        }\n        return inst;\n    }\n}",
                 codePy: "class Singleton:\n    _inst = None\n    def __new__(cls):\n        if cls._inst is None:\n            cls._inst = super().__new__(cls)\n        return cls._inst"
+            },
+            {
+                id: 131,
+                title: "Number of Islands",
+                topic: "Graph",
+                round: "Tech II",
+                diff: "Medium",
+                year: "2024",
+                freq: "High",
+                seenInImpetus: true,
+                source: "Naukri",
+                prob: "Count islands ('1's) in a binary grid.",
+                examples: ["[[\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\"],[\"0\",\"0\",\"1\"]] -> 2"],
+                edges: ["no islands"],
+                approach: "DFS/BFS on grid cells.",
+                time: "O(MxN)",
+                space: "O(MxN)",
+                codeJava: "public int numIslands(char[][] grid) {\n    int count = 0;\n    for(int i=0; i<grid.length; i++)\n        for(int j=0; j<grid[0].length; j++)\n            if(grid[i][j] == '1') {\n                dfs(grid, i, j);\n                count++;\n            }\n    return count;\n}\nvoid dfs(char[][] grid, int i, int j) {\n    if(i<0 || j<0 || i>=grid.length || j>=grid[0].length || grid[i][j]!='1') return;\n    grid[i][j] = '0';\n    dfs(grid, i+1, j); dfs(grid, i-1, j);\n    dfs(grid, i, j+1); dfs(grid, i, j-1);\n}",
+                codePy: "def numIslands(grid):\n    def dfs(i, j):\n        if i<0 or i>=len(grid) or j<0 or j>=len(grid[0]) or grid[i][j] != '1':\n            return\n        grid[i][j] = '0'\n        dfs(i+1, j); dfs(i-1, j); dfs(i, j+1); dfs(i, j-1)\n    \n    count = 0\n    for i in range(len(grid)):\n        for j in range(len(grid[0])):\n            if grid[i][j] == '1':\n                dfs(i, j)\n                count += 1\n    return count"
+            },
+            {
+                id: 132,
+                title: "BFS of Graph",
+                topic: "Graph",
+                round: "Tech II",
+                diff: "Medium",
+                year: "2023",
+                freq: "Medium",
+                seenInImpetus: true,
+                source: "GFG",
+                prob: "Return BFS traversal of graph.",
+                examples: ["adj=[[1,2,3],[0],[0],[0]] -> [0,1,2,3]"],
+                edges: ["disconnected"],
+                approach: "Queue and visited array.",
+                time: "O(V+E)",
+                space: "O(V)",
+                codeJava: "public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {\n    ArrayList<Integer> bfs = new ArrayList<>();\n    boolean[] vis = new boolean[V];\n    Queue<Integer> q = new LinkedList<>();\n    q.add(0); vis[0] = true;\n    while(!q.isEmpty()) {\n        Integer node = q.poll();\n        bfs.add(node);\n        for(Integer it: adj.get(node)) {\n            if(!vis[it]) {\n                vis[it] = true;\n                q.add(it);\n            }\n        }\n    }\n    return bfs;\n}",
+                codePy: "from collections import deque\ndef bfsOfGraph(V, adj):\n    bfs = []\n    vis = [False] * V\n    q = deque([0])\n    vis[0] = True\n    while q:\n        node = q.popleft()\n        bfs.append(node)\n        for it in adj[node]:\n            if not vis[it]:\n                vis[it] = True\n                q.append(it)\n    return bfs"
+            },
+            {
+                id: 133,
+                title: "Subsets",
+                topic: "Backtracking",
+                round: "Tech II",
+                diff: "Medium",
+                year: "2024",
+                freq: "Medium",
+                seenInImpetus: true,
+                source: "Naukri",
+                prob: "Return all possible subsets (power set).",
+                examples: ["[1,2,3] -> [[],[1],[2],[1,2],...]"],
+                edges: ["empty"],
+                approach: "Backtracking or Cascading.",
+                time: "O(N*2^N)",
+                space: "O(N)",
+                codeJava: "public List<List<Integer>> subsets(int[] nums) {\n    List<List<Integer>> res = new ArrayList<>();\n    backtrack(0, nums, new ArrayList<>(), res);\n    return res;\n}\nvoid backtrack(int start, int[] nums, List<Integer> curr, List<List<Integer>> res) {\n    res.add(new ArrayList<>(curr));\n    for(int i=start; i<nums.length; i++) {\n        curr.add(nums[i]);\n        backtrack(i+1, nums, curr, res);\n        curr.remove(curr.size()-1);\n    }\n}",
+                codePy: "def subsets(nums):\n    res = []\n    def backtrack(start, path):\n        res.append(path)\n        for i in range(start, len(nums)):\n            backtrack(i+1, path + [nums[i]])\n    backtrack(0, [])\n    return res"
+            },
+            {
+                id: 134,
+                title: "Permutations",
+                topic: "Backtracking",
+                round: "Tech II",
+                diff: "Medium",
+                year: "2023",
+                freq: "Medium",
+                seenInImpetus: true,
+                source: "Glassdoor",
+                prob: "Return all possible permutations.",
+                examples: ["[1,2,3] -> [[1,2,3],[1,3,2],...]"],
+                edges: ["distinct nums"],
+                approach: "Backtracking with swap or visited set.",
+                time: "O(N*N!)",
+                space: "O(N)",
+                codeJava: "public List<List<Integer>> permute(int[] nums) {\n    List<List<Integer>> res = new ArrayList<>();\n    backtrack(res, new ArrayList<>(), nums);\n    return res;\n}\nvoid backtrack(List<List<Integer>> res, List<Integer> tempList, int [] nums){\n    if(tempList.size() == nums.length){\n        res.add(new ArrayList<>(tempList));\n    } else{\n        for(int i = 0; i < nums.length; i++){\n            if(tempList.contains(nums[i])) continue;\n            tempList.add(nums[i]);\n            backtrack(res, tempList, nums);\n            tempList.remove(tempList.size() - 1);\n        }\n    }\n}",
+                codePy: "def permute(nums):\n    res = []\n    def backtrack(path):\n        if len(path) == len(nums):\n            res.append(path[:])\n            return\n        for x in nums:\n            if x not in path:\n                path.append(x)\n                backtrack(path)\n                path.pop()\n    backtrack([])\n    return res"
             }
         ];
 
@@ -1245,6 +1323,46 @@
                 seenInImpetus: true,
                 source: "FreshersWorld",
                 freq: "High"
+            },
+            {
+                cat: "Big Data",
+                q: "Spark Lazy Evaluation?",
+                a: "- Spark does not execute transformations immediately.\n- It builds a DAG (Directed Acyclic Graph) of operations.\n- Execution only starts when an Action (e.g., count, collect) is called.",
+                keywords: "DAG, optimization, skip data",
+                followup: "Advantage?",
+                seenInImpetus: true,
+                source: "Impetus 2024",
+                freq: "High"
+            },
+            {
+                cat: "Big Data",
+                q: "Spark Transformations vs Actions?",
+                a: "- Transformations: Lazy (e.g., map, filter). Return new RDD.\n- Actions: Trigger execution (e.g., count, collect, save). Return result to driver.",
+                keywords: "lazy, trigger, RDD lineage",
+                followup: "Is reduce() a transformation?",
+                seenInImpetus: true,
+                source: "Impetus 2023",
+                freq: "Very High"
+            },
+            {
+                cat: "Big Data",
+                q: "Kafka Topics and Partitions?",
+                a: "- Topic: Category or feed name for records.\n- Partition: Ordered, immutable sequence of records appended to a log.\n- Allows parallelism and scalability.",
+                keywords: "log, ordering, scalability, replication",
+                followup: "How is ordering guaranteed?",
+                seenInImpetus: true,
+                source: "Impetus 2024",
+                freq: "High"
+            },
+            {
+                cat: "Big Data",
+                q: "Kafka Consumer Groups?",
+                a: "- Group of consumers working together to consume a topic.\n- Each partition is consumed by exactly one consumer in the group.\n- Allows load balancing.",
+                keywords: "load balancing, offset tracking, scalability",
+                followup: "What if consumers > partitions?",
+                seenInImpetus: true,
+                source: "Impetus 2022",
+                freq: "Medium"
             }
         ];
 
@@ -1273,6 +1391,16 @@
                 title: "Department Highest Salary",
                 desc: "Find employees who have the highest salary in each of the departments.",
                 query: `SELECT d.name, e.name, e.salary FROM Employees e JOIN Department d ON e.dept_id = d.id WHERE (e.dept_id, e.salary) IN (SELECT dept_id, MAX(salary) FROM Employees GROUP BY dept_id);`
+            },
+            {
+                title: "Department Average Salary",
+                desc: "Find the average salary of each department.",
+                query: `SELECT d.name, AVG(e.salary) as avg_salary\nFROM Employees e\nJOIN Department d ON e.dept_id = d.id\nGROUP BY d.name;`
+            },
+            {
+                title: "Rank Scores",
+                desc: "Rank scores. If two scores are same, they have same rank. Next rank should be consecutive (Dense Rank).",
+                query: `SELECT score, DENSE_RANK() OVER (ORDER BY score DESC) as 'Rank'\nFROM Scores;`
             }
         ];
 
